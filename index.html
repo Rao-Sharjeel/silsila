@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Silsila-e-Saifia — سلسلہ سیفیہ</title>
+<meta name="description" content="A Sufi order of the Naqshbandi Mujaddidi tradition, founded by Akhundzada Peer Saif-ur-Rahman Mubarak. Daily practice, lineage, and the khanqah at Ravi Rehan Shareef.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Gulzar&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   SILSILA-E-SAIFIA — DESIGN SYSTEM
+
+   Organising idea: NOOR. Light enters every band from above and
+   falls across the content, the way it falls through the oculus
+   of a dome. Nothing on this page is threaded on a timeline
+   except the one thing that genuinely is a sequence — the chain.
+
+   Every colour and measure comes from the tokens below. Bands set
+   their own --fg / --mute / --accent / --rule / --noor, so no
+   component needs to know which ground it is sitting on.
+   ═══════════════════════════════════════════════════════════════ */
+
+:root{
+  /* ── Ground: night → dawn → paper.
+        The order's disciplines run from the last third of the
+        night through the day. The page keeps the same hours. ── */
+  --night:      #100E0C;   /* warm bistre-black, not blue-black  */
+  --paper:      #E7DFC9;   /* wheat parchment                    */
+
+  /* ── The chain ── */
+  --gold:       #B08B3E;
+  --gold-lit:   #D2AB5A;
+  --gold-ink:   #7A5F2A;   /* gold, dark enough to read on paper */
+  --rule-night: rgba(176,139,62,.34);
+  --rule-paper: rgba(122,95,42,.30);
+
+  /* ── Noor ── */
+  --lamp:       #F0D696;   /* the colour of light in this system */
+
+  /* ── Text ── */
+  --on-night:      #EFE7D4;
+  --on-night-mute: #A2957D;
+  --on-paper:      #1F1810;
+  --on-paper-mute: #695D48;
+
+  /* ── Lataif: the five subtle centres.
+        The traditional Mujaddidi colours. They appear in exactly
+        one place on this page and nowhere else. ── */
+  --qalb:  #E0A82E;   /* heart        — yellow */
+  --ruh:   #B33A2B;   /* spirit       — red    */
+  --sirr:  #F2ECDC;   /* secret       — white  */
+  --khafi: #5A5280;   /* hidden       — black  */
+  --akhfa: #1F7A60;   /* most hidden  — green  */
+
+  /* ── Measure ── */
+  --gutter: clamp(1.25rem, 5vw, 5rem);
+  --measure: 37rem;
+
+  /* ── Space ── */
+  --s1:.25rem; --s2:.5rem;  --s3:.75rem; --s4:1rem;
+  --s5:1.5rem; --s6:2rem;   --s7:3rem;   --s8:4rem;
+  --s9:5.5rem; --s10:7rem;
+  --band: clamp(4rem, 6.5vw, 6rem);
+
+  /* ── Type ── */
+  --nastaliq: "Gulzar", serif;
+  --naskh:    "Amiri", "Noto Naskh Arabic", serif;
+  --latin:    "Spectral", Georgia, serif;
+
+  /* Band defaults, so anything outside a band still renders. */
+  --fg:var(--on-night); --mute:var(--on-night-mute);
+  --accent:var(--gold-lit); --rule:var(--rule-night);
+  /* Gradients always fade to a zero-alpha version of their own
+     hue. Bare `transparent` is rgba(0,0,0,0) and interpolates
+     through grey, which prints a visible box on either ground. */
+  --noor:rgba(240,214,150,.09); --noor-0:rgba(240,214,150,0);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+body{
+  margin:0;
+  background:var(--night);
+  color:var(--fg);
+  font-family:var(--latin);
+  font-size:1.0625rem;
+  line-height:1.72;
+  font-feature-settings:"onum" 1,"kern" 1;
+  overflow-x:hidden;
+}
+svg{display:block}
+
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:1px}
+
+.skip{
+  position:absolute;left:var(--s4);top:-4rem;z-index:99;
+  background:var(--paper);color:var(--on-paper);
+  padding:var(--s3) var(--s5);text-decoration:none;
+  font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;
+  transition:top .18s ease;
+}
+.skip:focus{top:var(--s4)}
+
+/* ═══ BANDS & NOOR ══════════════════════════════════════════════
+   Two grounds. Each band is lit from its own top edge — the
+   structural device that replaced the rail. No section is a
+   timeline unless it is one.
+   ═══════════════════════════════════════════════════════════════ */
+
+.band{position:relative;isolation:isolate}
+.band--night{
+  background:var(--night);
+  --fg:var(--on-night); --mute:var(--on-night-mute);
+  --accent:var(--gold-lit); --rule:var(--rule-night);
+  --noor:rgba(240,214,150,.085); --noor-0:rgba(240,214,150,0);
+  color:var(--fg);
+}
+.band--paper{
+  background:var(--paper);
+  --fg:var(--on-paper); --mute:var(--on-paper-mute);
+  --accent:var(--gold-ink); --rule:var(--rule-paper);
+  --noor:rgba(255,249,229,.9); --noor-0:rgba(255,249,229,0);
+  color:var(--fg);
+}
+/* The lamp above each band. */
+.band::before{
+  content:"";position:absolute;z-index:-1;
+  left:0;right:0;top:0;height:min(30rem,60%);
+  pointer-events:none;
+  background:radial-gradient(115% 100% at 50% 0%,
+             var(--noor) 0%, var(--noor-0) 66%);
+}
+.band--nolamp::before{display:none}
+
+.wrap{
+  position:relative;
+  max-width:78rem;
+  margin-inline:auto;
+  padding-block:var(--band);
+  padding-inline:var(--gutter);
+}
+.wrap--strip{padding-block:var(--s7) var(--s10)}
+.wrap--follow{padding-top:var(--s5)}
+.wrap--tight{padding-block:var(--s8)}
+
+/* ═══ TYPE ══════════════════════════════════════════════════════
+   Urdu leads and English follows — the way the salikeen read.
+   RTL blocks are left-aligned so both scripts share one edge, and
+   every Urdu block carries a margin beneath it: Nastaliq drops
+   far below its baseline and will collide with anything close.
+   ═══════════════════════════════════════════════════════════════ */
+
+.ur{font-family:var(--nastaliq);line-height:2.3;font-weight:400;text-align:left}
+.ar{font-family:var(--naskh);line-height:1.9;text-align:left}
+.saw{font-family:var(--naskh);font-size:.8em;line-height:1;vertical-align:.04em}
+
+h1,h2,h3{font-weight:300;margin:0;text-wrap:balance}
+
+.label{font-size:.9rem;letter-spacing:.24em;text-transform:uppercase;font-weight:500;color:var(--accent);margin:0 0 var(--s6)}
+.h-ur{font-family:var(--nastaliq);text-align:left;font-size:clamp(2rem,4.6vw,3.4rem);line-height:2.1;font-weight:500;margin:0 0 var(--s4);color:var(--fg)}
+.h2{font-size:clamp(1.5rem,2.6vw,2.15rem);font-weight:300;letter-spacing:.005em;line-height:1.22;margin:0 0 var(--s5);color:var(--fg)}
+.h3{font-size:1.14rem;font-weight:500;letter-spacing:.005em;margin:0 0 var(--s2);color:var(--fg)}
+.lead{font-size:clamp(1.08rem,1.5vw,1.26rem);font-weight:300;line-height:1.64;max-width:var(--measure);color:var(--fg);margin:0 0 var(--s7)}
+p{max-width:var(--measure);margin:0 0 var(--s5)}
+p:last-child{margin-bottom:0}
+.fine{font-size:.9rem;line-height:1.7;color:var(--mute);max-width:32rem}
+.center{text-align:center}
+
+/* ═══ DEVOTIONAL HEADER ═════════════════════════════════════════
+   یا الله and یا رسول الله at the two corners, the salawat in the
+   light between them. Arabic invocation is set in naskh; Urdu
+   content everywhere else is set in nastaliq.
+   ═══════════════════════════════════════════════════════════════ */
+
+.invoke{
+  position:relative;
+  background:var(--night);
+  border-bottom:1px solid var(--rule-night);
+  --noor:rgba(240,214,150,.17); --noor-0:rgba(240,214,150,0);
+}
+.invoke::before{
+  content:"";position:absolute;z-index:0;
+  left:0;right:0;top:0;bottom:0;pointer-events:none;
+  background:radial-gradient(70% 260% at 50% -60%,
+             var(--noor) 0%, var(--noor-0) 72%);
+}
+.invoke__grid{
+  position:relative;z-index:1;
+  max-width:78rem;margin-inline:auto;
+  padding:var(--s5) var(--gutter);
+  display:grid;grid-template-columns:1fr auto 1fr;
+  align-items:center;gap:var(--s5);
+}
+/* dir=rtl would pull these to the right of their own cell, so each
+   corner is aligned explicitly. */
+.invoke__side{
+  font-family:var(--naskh);font-size:clamp(1.05rem,1.7vw,1.35rem);
+  line-height:1.6;color:var(--gold-lit);margin:0;white-space:nowrap;
+  text-align:left;
+}
+.invoke__side--r{text-align:right}
+.invoke__mid{
+  font-family:var(--naskh);
+  font-size:clamp(1.15rem,2.2vw,1.85rem);
+  line-height:1.7;color:var(--on-night);
+  margin:0;text-align:center;white-space:nowrap;
+  text-shadow:0 0 26px rgba(240,214,150,.32);
+}
+
+/* ═══ HERO ══════════════════════════════════════════════════════ */
+
+/* The hero is the order's whole claim in one figure: four
+   inherited lines, and the light of each running down into one.
+   Centred, because a convergence has to be symmetrical to read —
+   the only centred composition on the page. */
+.hero{position:relative;text-align:center;padding-block:var(--s8) var(--s9)}
+.hero__beam{
+  position:absolute;left:50%;top:-2rem;transform:translateX(-50%);
+  width:min(64rem,100%);height:32rem;pointer-events:none;z-index:0;
+  background:radial-gradient(46% 100% at 50% 0%,
+             rgba(240,214,150,.20) 0%,
+             rgba(240,214,150,.06) 48%,
+             rgba(240,214,150,0) 78%);
+  animation:noor 13s ease-in-out infinite;
+}
+@keyframes noor{0%,100%{opacity:.7}50%{opacity:1}}
+.hero__inner{position:relative;z-index:1}
+
+.hero__label{max-width:none;margin:0 auto var(--s5)}
+
+/* The four inherited orders, named in Arabic. */
+.origins{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:var(--s4) var(--s3);
+  max-width:56rem;margin:0 auto;
+}
+.origin__ar{
+  font-family:var(--naskh);text-align:center;
+  font-size:clamp(.95rem,2.1vw,1.65rem);line-height:1.7;
+  color:var(--gold-lit);margin:0 0 var(--s2);
+  text-shadow:0 0 22px rgba(240,214,150,.25);
+}
+.origin__en{
+  font-size:clamp(.54rem,1vw,.66rem);letter-spacing:.18em;
+  text-transform:uppercase;color:var(--mute);margin:0;
+}
+
+/* Four strands, one stem. Light travels down each in turn. */
+.weave{max-width:56rem;margin:var(--s4) auto var(--s3)}
+.weave svg{width:100%;height:auto}
+.weave .strand{fill:none;stroke:var(--rule-night);stroke-width:1}
+.weave .stem{fill:none;stroke:var(--gold);stroke-width:1}
+.weave .spark{
+  fill:none;stroke:var(--gold-lit);stroke-width:1.6;stroke-linecap:round;
+  stroke-dasharray:26 500;
+  animation:flow 7s cubic-bezier(.5,0,.6,1) infinite;
+}
+.weave .spark--2{animation-delay:.5s}
+.weave .spark--3{animation-delay:1s}
+.weave .spark--4{animation-delay:1.5s}
+@keyframes flow{
+  0%      {stroke-dashoffset:526; opacity:0}
+  8%      {opacity:1}
+  60%,100%{stroke-dashoffset:0;   opacity:0}
+}
+.weave .knot{fill:var(--gold-lit);animation:knot 7s ease-in-out infinite}
+@keyframes knot{0%,45%{opacity:.5;r:3.4}62%{opacity:1;r:5.4}100%{opacity:.5;r:3.4}}
+
+/* Narrow screens get a 2x2 of names, so the four-strand figure is
+   swapped for a plain stem and knot — the gathering still reads. */
+.gather{display:none}
+
+.hero__name{
+  font-family:var(--nastaliq);text-align:center;
+  font-size:clamp(2.6rem,8vw,5.6rem);line-height:1.7;font-weight:500;
+  margin:0 0 var(--s6);color:var(--on-night);
+  text-shadow:0 0 60px rgba(240,214,150,.22);
+}
+.hero__latin{max-width:none;font-size:clamp(.72rem,1.3vw,.86rem);letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin:0 auto var(--s6)}
+.hero__lead{font-size:clamp(1.08rem,1.5vw,1.28rem);font-weight:300;line-height:1.62;color:var(--mute);max-width:34rem;margin:0 auto var(--s7);text-wrap:pretty}
+.hero__lead em{font-style:italic;color:var(--on-night)}
+.hero__acts{display:flex;gap:var(--s5) var(--s7);flex-wrap:wrap;justify-content:center}
+
+.settle{opacity:0;animation:settle 1.5s cubic-bezier(.2,.7,.2,1) forwards}
+.settle--1{animation-delay:.1s}
+.settle--2{animation-delay:.4s}
+.settle--3{animation-delay:.7s}
+.settle--4{animation-delay:1s}
+@keyframes settle{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+
+/* ═══ LINKS ═════════════════════════════════════════════════════ */
+
+a{color:inherit}
+.act{
+  display:inline-flex;align-items:baseline;gap:.6em;
+  font-size:.92rem;letter-spacing:.06em;text-decoration:none;
+  padding-bottom:.35em;border-bottom:1px solid var(--rule);
+  color:var(--fg);transition:border-color .2s ease;
+}
+.act::after{content:"↓";font-size:.85em;color:var(--gold);transition:transform .2s ease}
+.act:hover{border-bottom-color:var(--accent)}
+.act:hover::after{transform:translateY(2px)}
+
+/* ═══ INTRODUCTION ══════════════════════════════════════════════
+   The order's own words on the right; the line of transmission
+   that authorises them on the left. Desktop places the chain
+   first because authority precedes claim — narrow screens read
+   top to bottom instead, words before lineage.
+   ═══════════════════════════════════════════════════════════════ */
+
+.intro__grid{
+  display:grid;
+  grid-template-columns:minmax(0,32rem) minmax(0,1fr);
+  gap:var(--s8);
+  align-items:start;
+  margin-top:var(--s7);
+}
+.intro__main{grid-column:2;grid-row:1;max-width:34rem}
+.intro__chain{grid-column:1;grid-row:1}
+
+/* ── The four, in full ───────────────────────────────────────── */
+.lineup{margin:var(--s8) 0 0;max-width:34rem;border-top:1px solid var(--rule)}
+.lineup__item{padding-block:var(--s6);border-bottom:1px solid var(--rule)}
+.lineup__head{display:flex;align-items:baseline;flex-wrap:wrap;gap:.85em;margin:0 0 var(--s3)}
+.lineup__ar{
+  font-family:var(--naskh);text-align:left;font-size:1.6rem;line-height:1.6;
+  color:var(--gold-lit);margin:0;text-shadow:0 0 24px rgba(240,214,150,.22);
+}
+.lineup__en{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin:0}
+.lineup__body{font-size:.96rem;line-height:1.74;color:var(--mute);margin:0}
+
+/* Scroll reveal — enabled only once JS confirms support, so the
+   content is never hidden from a browser that can't animate it. */
+.js-reveal .lineup__item{
+  opacity:0;transform:translateY(12px);
+  transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);
+}
+.js-reveal .lineup__item.is-visible{opacity:1;transform:none}
+
+/* ── The golden chain, in full ───────────────────────────────── */
+.intro__chain-note{font-size:.9rem;line-height:1.6;color:var(--mute);margin:0 0 var(--s2);max-width:30rem}
+.chain--long{position:relative;max-width:32rem}
+.chain--long::before{
+  content:"";position:absolute;left:3px;top:-4rem;width:2px;height:4rem;
+  background:linear-gradient(180deg,transparent,var(--gold-lit) 55%,transparent);
+  opacity:.85;pointer-events:none;animation:chainFlow 12s linear infinite;
+}
+.chain--long li{padding-block:.5rem}
+.chain--long .chain__nm{font-size:.94rem}
+.chain--long .chain__nm b{
+  font-weight:400;color:var(--mute);font-size:.74rem;letter-spacing:.03em;
+  margin-left:.6em;font-variant-numeric:lining-nums;white-space:nowrap;
+}
+
+/* The chain opens with the Prophet ﷺ — set apart from the
+   thirty-five masters who carry his authority forward. */
+.chain--long li.chain--first{padding-block:.5rem .9rem}
+.chain--long li.chain--first .chain__nm{
+  font-family:var(--naskh);font-size:1.3rem;line-height:1.55;
+  color:var(--gold-lit);text-shadow:0 0 22px rgba(240,214,150,.28);
+}
+.chain--long li.chain--first .chain__nm b{
+  font-family:var(--latin);color:var(--accent);font-size:.78rem;
+}
+.chain--long li.chain--first .saw{display:block;margin-top:.3em;font-size:1.35em}
+.chain--long li.chain--first::after{
+  width:12px;height:12px;left:-1px;top:.35em;
+  background:var(--gold-lit);box-shadow:0 0 18px 4px rgba(210,171,90,.65);
+}
+@keyframes chainFlow{0%{top:-4rem}100%{top:100%}}
+.js-reveal .chain--long li{
+  opacity:0;transform:translateY(8px);
+  transition:opacity .6s ease,transform .6s ease;
+}
+.js-reveal .chain--long li.is-visible{opacity:1;transform:none}
+
+/* ═══ FOUR ORDERS ═══════════════════════════════════════════════ */
+
+.orders{display:grid;grid-template-columns:repeat(auto-fit,minmax(12.5rem,1fr));gap:var(--s6);margin:var(--s7) 0 0;max-width:64rem}
+.order__ur{font-family:var(--naskh);text-align:left;font-size:1.5rem;line-height:1.8;font-weight:400;color:var(--gold-lit);margin:0 0 var(--s2)}
+.order__name{font-size:.71rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin:0 0 var(--s3)}
+.order__body{font-size:.97rem;line-height:1.68;color:var(--mute);margin:0;max-width:22rem}
+
+/* Keeps its own top margin so it still clears the cards when the
+   diagram is dropped on small screens. */
+.converge__note{font-style:italic;font-weight:300;font-size:1.1rem;line-height:1.6;color:var(--fg);max-width:32rem;margin:var(--s8) 0 0}
+
+/* ═══ AYAT AN-NUR ═══════════════════════════════════════════════ */
+
+.ayat{max-width:46rem;margin:0 0 var(--s8);padding-left:var(--s6);border-left:1px solid var(--rule)}
+.ayat__ar{font-family:var(--naskh);text-align:left;font-size:clamp(1.2rem,2vw,1.6rem);line-height:2;color:var(--gold-lit);margin:0 0 var(--s3);text-shadow:0 0 24px rgba(240,214,150,.22)}
+.ayat__tx{font-style:italic;font-weight:300;font-size:1.06rem;line-height:1.62;color:var(--fg);margin:0 0 var(--s2);max-width:34rem}
+.ayat__src{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);margin:0}
+
+/* ═══ LATAIF ════════════════════════════════════════════════════ */
+
+.lataif{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:var(--s9);align-items:center;margin-top:var(--s8);max-width:64rem}
+.lataif__figure{position:relative;aspect-ratio:1/.94;width:100%;max-width:30rem;margin-inline:auto}
+.lat{position:absolute;transform:translate(-50%,-50%);width:3.6rem;height:3.6rem;border:0;background:transparent;padding:0;cursor:pointer;border-radius:50%;display:grid;place-items:center}
+.lat__dot{width:14px;height:14px;border-radius:50%;background:currentColor;opacity:.32;transition:opacity .35s ease,transform .35s ease,box-shadow .35s ease}
+.lat__dot::after{content:"";position:absolute;inset:-.35rem;border-radius:50%;background:radial-gradient(circle,currentColor 0%,transparent 70%);opacity:.18;transition:opacity .35s ease,inset .35s ease}
+.lat:hover .lat__dot{opacity:.72}
+.lat[aria-pressed="true"] .lat__dot{opacity:1;transform:scale(1.5);box-shadow:0 0 26px 4px currentColor}
+.lat[aria-pressed="true"] .lat__dot::after{opacity:.6}
+
+.lat--sirr {color:var(--sirr);  left:17%; top:16%}
+.lat--khafi{color:var(--khafi); left:83%; top:16%}
+.lat--akhfa{color:var(--akhfa); left:50%; top:48%}
+.lat--qalb {color:var(--qalb);  left:17%; top:80%}
+.lat--ruh  {color:var(--ruh);   left:83%; top:80%}
+
+.lat__cap{position:absolute;top:calc(100% - .35rem);left:50%;transform:translateX(-50%);text-align:center;white-space:nowrap}
+.lat__cap i{display:block;font-family:var(--naskh);font-style:normal;font-size:1.1rem;line-height:1.2;color:var(--mute);transition:color .3s ease}
+.lat__cap u{display:block;text-decoration:none;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);opacity:.7;margin-top:.25em;transition:color .3s ease,opacity .3s ease}
+.lat[aria-pressed="true"] .lat__cap i{color:var(--fg)}
+.lat[aria-pressed="true"] .lat__cap u{color:var(--gold-lit);opacity:1}
+
+.lat__read{border-left:1px solid var(--rule);padding-left:var(--s7);min-height:17rem}
+.lat__read h3{font-family:var(--naskh);text-align:left;font-size:2.4rem;font-weight:400;line-height:1.4;margin:0 0 var(--s1);color:var(--fg)}
+.lat__tl{font-size:1.06rem;font-weight:400;letter-spacing:.02em;margin:0 0 var(--s5);color:var(--fg)}
+.lat__meta{list-style:none;margin:0 0 var(--s5);padding:0;font-size:.92rem;line-height:1.6;color:var(--mute)}
+.lat__meta li{margin-bottom:.3em}
+.lat__meta b{display:inline-block;min-width:7.5rem;font-size:.66rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.lat__swatch{display:inline-block;width:.6rem;height:.6rem;border-radius:50%;background:currentColor;margin-right:.4em;box-shadow:0 0 0 1px rgba(239,231,212,.25)}
+.lat__text{font-size:1.02rem;line-height:1.68;color:var(--fg);max-width:26rem;margin:0}
+.lataif__foot{margin-top:var(--s9);max-width:36rem}
+
+/* ═══ MAMULAT ═══════════════════════════════════════════════════
+   Two bands with a dawn strip between them, rather than one long
+   gradient — so no line of text ever lands on a mid-tone ground.
+   ═══════════════════════════════════════════════════════════════ */
+
+.mamul{list-style:none;margin:var(--s7) 0 0;padding:0;max-width:54rem}
+.mamul__item{display:grid;grid-template-columns:minmax(0,12rem) minmax(0,1fr);gap:var(--s2) var(--s6);padding-block:var(--s6);border-top:1px solid var(--rule)}
+.mamul__item:first-child{border-top:0;padding-top:0}
+.mamul__when{font-size:.71rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0;padding-top:.55em}
+.mamul__ur{font-family:var(--nastaliq);text-align:left;font-size:1.5rem;line-height:2;font-weight:500;margin:0 0 var(--s2);color:var(--fg)}
+.mamul__tl{font-size:1.02rem;font-weight:500;letter-spacing:.02em;margin:0 0 var(--s2);color:var(--fg)}
+.mamul__body{font-size:.97rem;line-height:1.7;color:var(--mute);margin:0;max-width:30rem}
+
+.dawnband{
+  background-image:linear-gradient(180deg,
+    var(--night) 0%, var(--night) 30%,
+    #1F1911 40%, #392D1E 52%, #6F5D40 64%,
+    #A9997A 76%, #CFC3A4 86%, var(--paper) 100%);
+  --fg:var(--on-night); --mute:var(--on-night-mute);
+  --accent:var(--gold-lit); --rule:var(--rule-night);
+}
+.fajr{display:flex;align-items:center;gap:var(--s5);max-width:54rem}
+.fajr__ur{font-family:var(--nastaliq);text-align:left;font-size:1.6rem;line-height:1.4;font-weight:500;color:var(--on-night);margin:0;padding-bottom:.35em;text-shadow:0 0 22px rgba(240,214,150,.3)}
+.fajr__rule{flex:1;height:1px;background:linear-gradient(90deg,var(--gold),rgba(176,139,62,.15))}
+.fajr__tx{font-size:.71rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-lit);white-space:nowrap;margin:0}
+
+/* ═══ FOUNDER ═══════════════════════════════════════════════════
+   A register of places, not a timeline. No dots, no connecting
+   line — the chain further down is the only sequence on the page.
+   ═══════════════════════════════════════════════════════════════ */
+
+.founder__dates{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin:0 0 var(--s6)}
+.register{margin:var(--s8) 0 0;max-width:56rem;border-top:1px solid var(--rule)}
+.register__row{display:grid;grid-template-columns:minmax(0,9rem) minmax(0,11rem) minmax(0,1fr);gap:var(--s2) var(--s6);padding-block:var(--s5);border-bottom:1px solid var(--rule)}
+.reg__yr{font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0;padding-top:.4em;font-variant-numeric:lining-nums}
+.reg__pl{font-size:1.05rem;font-weight:500;margin:0;color:var(--fg)}
+.reg__tx{margin:0;font-size:.97rem;line-height:1.64;color:var(--mute);max-width:28rem}
+
+.names{display:grid;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));gap:var(--s5) var(--s7);margin:var(--s9) 0 0;max-width:46rem}
+.names div{border-top:1px solid var(--rule);padding-top:var(--s4)}
+.names dt{font-size:1.02rem;font-weight:500;margin:0 0 .2em}
+.names dd{margin:0;font-size:.92rem;line-height:1.6;color:var(--mute)}
+
+/* ═══ THE GOLDEN CHAIN ══════════════════════════════════════════
+   The one sequence on the page, and the only place a connected
+   vertical line appears. It earns it: this is literally a chain.
+   ═══════════════════════════════════════════════════════════════ */
+
+.chain{list-style:none;padding:0;margin:var(--s8) 0 0;max-width:36rem}
+.chain li{position:relative;padding:var(--s3) 0 var(--s3) var(--s7)}
+.chain li::before{content:"";position:absolute;left:3px;top:0;bottom:0;width:1px;background:var(--rule)}
+.chain li:first-child::before{top:1.35em}
+.chain li:last-child::before{bottom:auto;height:1.35em}
+.chain li::after{content:"";position:absolute;left:0;top:1.2em;width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px 1px rgba(176,139,62,.5)}
+.chain__nm{font-size:1.06rem;font-weight:400;margin:0;line-height:1.45}
+.chain__nm span{display:block;color:var(--mute);font-size:.86rem;margin-top:.1em}
+.chain__nm span.ar{font-size:1.15rem;line-height:1.5;margin-top:0}
+.chain li.gap{padding-block:var(--s5)}
+.chain li.gap::after{display:none}
+.chain li.gap p{font-size:.71rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);margin:0}
+.chain+.tbc{margin-top:var(--s6)}
+
+/* ═══ TBC — provisional content ═════════════════════════════════
+   The dossier flags several facts as unconfirmed. Rather than
+   inventing them, the system marks them as awaiting the khanqah.
+   ═══════════════════════════════════════════════════════════════ */
+.tbc{position:relative;padding:var(--s3) 0 var(--s3) var(--s5);margin:var(--s5) 0 0;font-size:.88rem;line-height:1.6;color:var(--mute);max-width:30rem}
+.tbc::before{content:"";position:absolute;left:0;top:.5em;bottom:.5em;width:2px;background:var(--gold);opacity:.55}
+.tbc b{display:block;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--accent);margin-bottom:.3em}
+
+/* ═══ KHANQAH ═══════════════════════════════════════════════════ */
+
+.khanqah__photo{margin:var(--s7) 0 0;max-width:60rem}
+.khanqah__photo img{
+  display:block;width:100%;height:auto;
+  filter:sepia(.3) saturate(.7) brightness(1.05) contrast(.96);
+  mix-blend-mode:multiply;
+  -webkit-mask-image:radial-gradient(ellipse 78% 72% at 50% 50%,#000 48%,transparent 92%);
+  mask-image:radial-gradient(ellipse 78% 72% at 50% 50%,#000 48%,transparent 92%);
+}
+
+/* Round medallion variant — for placement on the night ground.
+   The artwork is gold linework on its own near-black canvas, so
+   screen (not a mask alone) is what erases that canvas into the
+   band's own ground — the same trick multiply does for a light
+   photo on paper, inverted. Lit from behind like the band's noor. */
+.medallion{position:relative;width:min(23rem,82%);aspect-ratio:1/1;margin:var(--s8) auto 0}
+.medallion::before{
+  content:"";position:absolute;inset:-22%;z-index:-1;pointer-events:none;
+  background:radial-gradient(circle,var(--noor) 0%,var(--noor-0) 70%);
+}
+.medallion img{
+  display:block;width:100%;height:100%;object-fit:cover;
+  mix-blend-mode:screen;
+  filter:brightness(1.08) saturate(1.1);
+  -webkit-mask-image:radial-gradient(circle at 50% 50%,#000 58%,transparent 88%);
+  mask-image:radial-gradient(circle at 50% 50%,#000 58%,transparent 88%);
+}
+.khanqah{display:grid;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));gap:var(--s9) var(--s8);margin-top:var(--s8);max-width:60rem}
+.addr{font-style:normal;font-size:1rem;line-height:1.72;color:var(--mute);margin:0;max-width:24rem}
+.addr b{font-weight:500;color:var(--fg)}
+.reach{columns:2;column-gap:var(--s6);list-style:none;margin:var(--s4) 0 0;padding:0;font-size:.95rem;line-height:1.9;color:var(--mute)}
+
+/* ═══ FOOTER & COLOPHON ═════════════════════════════════════════ */
+
+.foot__top{display:flex;flex-wrap:wrap;gap:var(--s6) var(--s8);justify-content:space-between;align-items:flex-end;padding-bottom:var(--s7);border-bottom:1px solid var(--rule)}
+.foot__ur{font-family:var(--nastaliq);text-align:left;font-size:2.2rem;line-height:1.8;font-weight:500;margin:0}
+.foot__nav{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s6);list-style:none;margin:0;padding:0;font-size:.86rem;letter-spacing:.08em}
+.foot__nav a{text-decoration:none;color:var(--mute);transition:color .2s ease}
+.foot__nav a:hover{color:var(--fg)}
+
+.colophon{padding-top:var(--s8)}
+.colophon h2{font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);font-weight:500;margin:0 0 var(--s6)}
+.col__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:var(--s7);max-width:64rem}
+.col__grid h3{font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--fg);margin:0 0 var(--s3)}
+.col__grid p{font-size:.85rem;line-height:1.65;margin:0;color:var(--mute);max-width:23rem}
+.sw{display:flex;flex-wrap:wrap;gap:var(--s3);margin:0 0 var(--s4);padding:0;list-style:none}
+.sw li{width:1.5rem;height:1.5rem;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(239,231,212,.2)}
+.type-spec{list-style:none;margin:0 0 var(--s4);padding:0}
+.type-spec li{margin-bottom:var(--s3)}
+.type-spec b{display:block;font-weight:400;font-size:1.2rem;line-height:1.6;text-align:left}
+.type-spec span{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.legal{margin-top:var(--s9);padding-top:var(--s5);border-top:1px solid var(--rule);font-size:.78rem;line-height:1.7;color:var(--mute);max-width:44rem}
+
+/* ═══ RESPONSIVE ════════════════════════════════════════════════ */
+
+@media (max-width:1000px){
+  .intro__grid{grid-template-columns:1fr;gap:var(--s8)}
+  .intro__main{grid-column:1;grid-row:1;max-width:none}
+  .intro__chain{grid-column:1;grid-row:2;padding-top:var(--s7);border-top:1px solid var(--rule)}
+  .lataif{grid-template-columns:1fr;gap:var(--s8)}
+  .lat__read{border-left:0;border-top:1px solid var(--rule);padding-left:0;padding-top:var(--s6);min-height:0}
+  .lataif__figure{max-width:21rem}
+  .register__row{grid-template-columns:minmax(0,9rem) minmax(0,1fr)}
+  .reg__yr{grid-row:span 2}
+}
+@media (max-width:700px){
+  .origins{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s5) var(--s4);max-width:26rem}
+  .origin__ar{font-size:1.35rem}
+  .origin__en{font-size:.6rem}
+  .weave{display:none}
+  .gather{
+    display:block;position:relative;width:1px;height:3.75rem;
+    margin:var(--s6) auto var(--s5);
+    background:linear-gradient(180deg,rgba(176,139,62,.15),var(--gold));
+  }
+  .gather::after{
+    content:"";position:absolute;left:50%;bottom:-3px;transform:translateX(-50%);
+    width:7px;height:7px;border-radius:50%;background:var(--gold-lit);
+    box-shadow:0 0 12px 2px rgba(210,171,90,.55);
+  }
+  .invoke__grid{grid-template-columns:1fr 1fr;gap:var(--s3) var(--s4);text-align:center}
+  .invoke__mid{grid-column:1/-1;grid-row:2;white-space:normal;line-height:2}
+  .invoke__side{font-size:1rem}
+}
+@media (max-width:640px){
+  :root{--band:3.75rem}
+  .mamul__item{grid-template-columns:1fr;gap:var(--s2)}
+  .mamul__when{padding-top:0}
+  .register__row{grid-template-columns:1fr;gap:var(--s1)}
+  .reg__yr{grid-row:auto;padding-top:0}
+  .reach{columns:1}
+  .lat__meta b{display:block;min-width:0;margin-bottom:.1em}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.001ms!important;
+  }
+  .settle{opacity:1;transform:none}
+  .hero__beam{opacity:.9!important}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#path">Skip to content</a>
+
+<!-- ═══ DEVOTIONAL HEADER — temporarily disabled ═══════════════
+<div class="invoke">
+  <div class="invoke__grid">
+    <p class="invoke__side" dir="rtl" lang="ar">يَا رَسُوْلَ اللّٰه</p>
+    <p class="invoke__mid" dir="rtl" lang="ar">اَلصَّلَاةُ وَالسَّلَامُ عَلَيْكَ يَا رَسُوْلَ اللّٰه</p>
+    <p class="invoke__side invoke__side--r" dir="rtl" lang="ar">يَا اللّٰه</p>
+  </div>
+</div>
+═══════════════════════════════════════════════════════════════ -->
+
+<!-- ═══ HERO ═══════════════════════════════════════════════════ -->
+<header class="band band--night band--nolamp">
+  <div class="wrap hero">
+    <span class="hero__beam" aria-hidden="true"></span>
+
+    <div class="hero__inner">
+      <p class="label hero__label settle settle--1">Four orders, gathered</p>
+
+      <div class="origins settle settle--1">
+        <div>
+          <p class="origin__ar" dir="rtl" lang="ar">النقشبندية</p>
+          <p class="origin__en">Naqshbandiyya</p>
+        </div>
+        <div>
+          <p class="origin__ar" dir="rtl" lang="ar">القادرية</p>
+          <p class="origin__en">Qadiriyya</p>
+        </div>
+        <div>
+          <p class="origin__ar" dir="rtl" lang="ar">الچشتية</p>
+          <p class="origin__en">Chishtiyya</p>
+        </div>
+        <div>
+          <p class="origin__ar" dir="rtl" lang="ar">السهروردية</p>
+          <p class="origin__en">Suhrawardiyya</p>
+        </div>
+      </div>
+
+      <!-- Four strands into one stem. The light of each line runs
+           down it in turn and gathers at the knot. -->
+      <div class="weave settle settle--2" aria-hidden="true">
+        <svg viewBox="0 0 800 172" role="presentation">
+          <g class="strand">
+            <path pathLength="500" d="M100,4 C100,84 400,60 400,134"/>
+            <path pathLength="500" d="M300,4 C300,96 400,90 400,134"/>
+            <path pathLength="500" d="M500,4 C500,96 400,90 400,134"/>
+            <path pathLength="500" d="M700,4 C700,84 400,60 400,134"/>
+          </g>
+          <path class="spark"           pathLength="500" d="M100,4 C100,84 400,60 400,134"/>
+          <path class="spark spark--2"  pathLength="500" d="M300,4 C300,96 400,90 400,134"/>
+          <path class="spark spark--3"  pathLength="500" d="M500,4 C500,96 400,90 400,134"/>
+          <path class="spark spark--4"  pathLength="500" d="M700,4 C700,84 400,60 400,134"/>
+          <circle class="knot" cx="400" cy="134" r="3.4"/>
+          <path class="stem" d="M400,134 L400,172"/>
+        </svg>
+      </div>
+      <span class="gather settle settle--2" aria-hidden="true"></span>
+
+      <h1 class="hero__name settle settle--3" dir="rtl" lang="ur">سلسلہ سیفیہ<span class="sr">Silsila-e-Saifia</span></h1>
+      <p class="hero__latin settle settle--3">Silsila-e-Saifia</p>
+      <p class="hero__lead settle settle--4">One chain, carrying four inheritances. <br>
+        <em>Silsila-e-Saifia</em> an Islamic Sufi order following Hanafi Madhhab founded by <em>Hazrat Peer-e-Archi Akhundzada Saif-ur-Rahman Mubarak (R.A.)</em> </p>
+      <div class="hero__acts settle settle--4">
+        <!-- <a class="act" href="#path">See what each order gives</a>
+        <a class="act" href="#khanqah">Find the khanqah</a> -->
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ═══ INTRODUCTION ═══════════════════════════════════════════ -->
+<section class="band band--night" id="intro">
+  <div class="wrap">
+    <h3 class="label center">Origins</h3>
+    <h2 class="h2 center">A Gathering of Rivers</h2>
+
+    <div class="intro__grid">
+      <div class="intro__main">
+        <header class="lineup__head">
+          <p class="lineup__ar" dir="rtl" lang="ar">سلسلہ سیفیہ</p>
+          <br><br>
+          <p class="lineup__en">Silsila-e-Saifia</p>
+        </header>
+        <p class="lead">For centuries, the great Sufi orders of Islam — Naqshbandiyya, Qadiriyya, Chishtiyya, and Suhrawardiyya — developed along distinct paths, each carrying its own methods of remembrance, discipline, and spiritual training. <em>Silsila-e-Saifia</em> is where these four rivers meet.</p>
+        <p class="lead">Founded by <em>Hazrat Peer-e-Archi Akhundzada Saif-ur-Rahman Mubarak (R.A.)</em>, the order was established not to replace these paths but to unite them — offering a single chain of transmission through which a seeker may draw on the full breadth of Sufi tradition, grounded firmly in the Hanafi school of jurisprudence.</p>
+
+        <div class="lineup">
+          <article class="lineup__item">
+            <header class="lineup__head">
+              <p class="lineup__ar" dir="rtl" lang="ar">النقشبندية</p>
+              <p class="lineup__en">Naqshbandiyya</p>
+            </header>
+            <p class="lineup__body">The Naqshbandi order traces its silent, heart-centered method of remembrance back through an unbroken chain to Abu Bakr al-Siddiq (R.A.), the first Caliph of Islam. Known for its emphasis on inward remembrance over outward expression, discipline of the self, and closeness to the Prophetic Sunnah, it remains one of the most widely practiced Sufi paths across Central and South Asia.</p>
+          </article>
+          <article class="lineup__item">
+            <header class="lineup__head">
+              <p class="lineup__ar" dir="rtl" lang="ar">الچشتية</p>
+              <p class="lineup__en">Chishtiyya</p>
+            </header>
+            <p class="lineup__body">Brought to South Asia by Khwaja Moinuddin Chishti (R.A.), the Chishti order is renowned for its emphasis on love, tolerance, and openness — expressed through practices such as sama (spiritual audition) and a deep concern for serving humanity regardless of faith or background. It remains one of the most influential Sufi orders on the subcontinent.</p>
+          </article>
+          <article class="lineup__item">
+            <header class="lineup__head">
+              <p class="lineup__ar" dir="rtl" lang="ar">القادرية</p>
+              <p class="lineup__en">Qadiriyya</p>
+            </header>
+            <p class="lineup__body">Founded by Shaikh Abdul Qadir Jilani (R.A.) in 12th-century Baghdad, the Qadiri order is among the oldest and most widespread Sufi paths in the Muslim world. It is distinguished by its balance of spiritual devotion with adherence to Islamic law, and by a tradition of scholarship, humility, and service that spread the order from the Middle East to nearly every corner of the Islamic world.</p>
+          </article>
+          <article class="lineup__item">
+            <header class="lineup__head">
+              <p class="lineup__ar" dir="rtl" lang="ar">السهروردية</p>
+              <p class="lineup__en">Suhrawardiyya</p>
+            </header>
+            <p class="lineup__body">Established by Shaikh Shihabuddin Suhrawardi (R.A.), the Suhrawardi order is marked by its rigorous integration of Islamic jurisprudence with spiritual training, producing scholars and saints who bridged the outward sciences of Islamic law with the inward sciences of the heart. Its influence spread through Persia, Central Asia, and the Indian subcontinent.</p>
+          </article>
+        </div>
+
+        <!-- <p class="converge__note">What distinguishes Silsila-e-Saifia is not innovation, but inheritance — a lineage that gathers four centuries of spiritual authority into one continuous chain, still guiding seekers today.</p> -->
+
+        <figure >
+          <img src="golden2.jpeg" alt="The mazaar at Ravi Rehan Shareef" loading="lazy">
+        </figure>
+      </div>
+
+      <aside class="intro__chain" aria-labelledby="chainSideLabel">
+        <p class="label" id="chainSideLabel">The Golden Chain</p>
+        <p class="intro__chain-note">Thirty-six links, master to disciple, from the Prophet <span class="saw">ﷺ</span> to Sarkar Mubarak.</p>
+
+        <ol class="chain chain--long">
+          <li class="chain--first"><p class="chain__nm">Hazrat Muhammad Mustafa&nbsp;<b>632</b><span class="saw">ﷺ</span></p></li>
+          <li><p class="chain__nm">Abu Bakr as-Siddiq&nbsp;<b>634</b><span class="ar" dir="rtl" lang="ar">رضی اللہ عنہ</span></p></li>
+          <li><p class="chain__nm">Salman al-Farsi&nbsp;<b>654</b><span class="ar" dir="rtl" lang="ar">رضی اللہ عنہ</span></p></li>
+          <li><p class="chain__nm">Qasim ibn Muhammad ibn Abi Bakr&nbsp;<b>101 AH</b></p></li>
+          <li><p class="chain__nm">Jafar al-Sadiq&nbsp;<b>765</b></p></li>
+          <li><p class="chain__nm">Bayazid al-Bastami&nbsp;<b>875</b></p></li>
+          <li><p class="chain__nm">Abul-Hassan Kharaqani&nbsp;<b>1033</b></p></li>
+          <li><p class="chain__nm">Abu al-Qasim Gurgani&nbsp;<b>1058</b></p></li>
+          <li><p class="chain__nm">Abu Ali Farmadi&nbsp;<b>1084/1117</b></p></li>
+          <li><p class="chain__nm">Abu Yaqub Yusuf Hamadani&nbsp;<b>1141</b></p></li>
+          <li><p class="chain__nm">Abdul Khaliq Ghijduwani&nbsp;<b>1179</b></p></li>
+          <li><p class="chain__nm">Arif Reogari&nbsp;<b>1219</b></p></li>
+          <li><p class="chain__nm">Mahmood Anjir-Faghnawi&nbsp;<b>1317</b></p></li>
+          <li><p class="chain__nm">Azizan Ali Ramitani&nbsp;<b>1315/1321</b></p></li>
+          <li><p class="chain__nm">Muhammad Baba Samasi&nbsp;<b>1354</b></p></li>
+          <li><p class="chain__nm">Sayyid Amir Kulal&nbsp;<b>1370</b></p></li>
+          <li><p class="chain__nm">Baha-ud-Din Naqshband Bukhari&nbsp;<b>1389</b><span>from whom the order takes its name</span></p></li>
+          <li><p class="chain__nm">Ala'uddin Attar&nbsp;<b>1402</b></p></li>
+          <li><p class="chain__nm">Yaqub Charkhi&nbsp;<b>1447</b></p></li>
+          <li><p class="chain__nm">Ubaidullah Ahrar&nbsp;<b>1490</b></p></li>
+          <li><p class="chain__nm">Muhammad Zahid Wakhshi&nbsp;<b>1529</b></p></li>
+          <li><p class="chain__nm">Darwish Muhammad&nbsp;<b>1562</b></p></li>
+          <li><p class="chain__nm">Muhammad Amkanagi&nbsp;<b>1600</b></p></li>
+          <li><p class="chain__nm">Muhammad Baqi Billah&nbsp;<b>1603</b></p></li>
+          <li><p class="chain__nm">Ahmad Sirhindi&nbsp;<b>1624</b><span>Mujaddid Alf-e-Thani</span></p></li>
+          <li><p class="chain__nm">Masum al-Faruqi&nbsp;<b>1688</b></p></li>
+          <li><p class="chain__nm">Muhammad Sibghatullah al-Faruqi&nbsp;<b>1710</b></p></li>
+          <li><p class="chain__nm">Muhammad Ismail&nbsp;<b>1724</b></p></li>
+          <li><p class="chain__nm">Masum al-Faruqi II&nbsp;<b>1161 AH</b></p></li>
+          <li><p class="chain__nm">Shah Ghulam Muhammad&nbsp;<b>1762</b></p></li>
+          <li><p class="chain__nm">Hajji Muhammad Safi&nbsp;<b>1798</b></p></li>
+          <li><p class="chain__nm">Shah Zia al-Haq&nbsp;<b>1225 AH</b></p></li>
+          <li><p class="chain__nm">Shams al-Haq&nbsp;<b>1350 AH</b></p></li>
+          <li><p class="chain__nm">Shah Rasul Thaqalayni&nbsp;<b>1942</b></p></li>
+          <li><p class="chain__nm">Muhammad Hashim Samangani&nbsp;<b>1391 AH</b></p></li>
+          <!-- <li><p class="chain__nm">Saif-ur-Rahman Mubarak&nbsp;<b>2010</b><span>Sarkar Mubarak</span></p></li> -->
+          <li class="chain--first"><p class="chain__nm">Saif-ur-Rahman Mubarak&nbsp;<b>2010</b><span class="saw">Peer-e-Archi Sarkar</span></p></li>
+          <li><p class="chain__nm"><h3>Sarkar Peer Mian Muhammad Mubarak Hanafi Saifi</h3><b></b></p></li>
+          <li><p class="chain__nm"><h3>Sarkar Peer Muhammad Akhtar Rasool Hanafi Saifi Sahib</h3><b></b></p></li>
+
+
+
+        </ol>
+
+        <!-- <div class="tbc">
+          <b>Recited daily</b>
+          Saifi disciples say the chain each day, followed by munajat. <a class="act" href="#chain">How it's kept</a>
+        </div> -->
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOUR ORDERS ════════════════════════════════════════════ -->
+<section class="band band--night" id="path">
+  <div class="wrap">
+    <p class="label">The path</p>
+    <h2 class="h-ur" dir="rtl" lang="ur">چار سلسلے</h2>
+    <p class="h2">Four inheritances, one chain</p>
+    <p class="lead">Most orders trace authority through a single line. Sarkar Mubarak held khilafat in more than one, and the training he left draws on four. A Saifi disciple inherits all of them at once.</p>
+
+    <div class="orders">
+      <article>
+        <p class="order__ur" dir="rtl" lang="ar">النقشبندية</p>
+        <p class="order__name">Naqshbandiyya</p>
+        <p class="order__body">The primary root, through its Mujaddidi branch from Ahmad Sirhindi. Silent remembrance, sobriety, and attention held in the breath.</p>
+      </article>
+      <article>
+        <p class="order__ur" dir="rtl" lang="ar">القادرية</p>
+        <p class="order__name">Qadiriyya</p>
+        <p class="order__body">From Abdul Qadir Gilani. Sarkar Mubarak received khilafat in this line through Sheikh Haji Pachero.</p>
+      </article>
+      <article>
+        <p class="order__ur" dir="rtl" lang="ar">الچشتية</p>
+        <p class="order__name">Chishtiyya</p>
+        <p class="order__body">From Moinuddin Chishti. Love taken as method, and remembrance that is heard as well as held.</p>
+      </article>
+      <article>
+        <p class="order__ur" dir="rtl" lang="ar">السهروردية</p>
+        <p class="order__name">Suhrawardiyya</p>
+        <p class="order__body">From Shihab al-Din Suhrawardi. Service, discipline, and the ordered rule of the khanqah.</p>
+      </article>
+    </div>
+
+
+    <p class="converge__note">The four do not compete for the disciple. They are gathered, and handed on together.</p>
+  </div>
+</section>
+
+<!-- ═══ LATAIF ═════════════════════════════════════════════════ -->
+<section class="band band--night" id="lataif">
+  <div class="wrap">
+    <p class="label">The Light</p>
+
+    <blockquote class="ayat">
+      <p class="ayat__ar" dir="rtl" lang="ar">اَللّٰهُ نُوْرُ السَّمٰوَاتِ وَالْاَرْضِ</p>
+      <p class="ayat__tx">Allah is the Light of the heavens and the earth. The likeness of His Light is a niche, and within it a lamp; the lamp in glass, the glass as though it were a shining star.</p>
+      <p class="ayat__src">Surah an-Nur 24:35</p>
+    </blockquote>
+
+    <h2 class="h-ur" dir="rtl" lang="ur">لطائف</h2>
+    <p class="h2">The five subtle centres</p>
+    <p class="lead">Naqshbandi masters describe faculties within the person, each with its own seat and its own light. Under a shaykh's direction the disciple's attention rests on one, then moves to the next, in order. Followers of Sarkar Mubarak knew him for this work above all.</p>
+
+    <div class="lataif">
+      <div class="lataif__figure" role="group" aria-label="The five lataif — select one to read about it">
+        <button class="lat lat--sirr" data-lat="sirr" aria-pressed="false">
+          <span class="lat__dot"></span>
+          <span class="lat__cap"><i dir="rtl" lang="ar">سرّ</i><u>Sirr</u></span>
+        </button>
+        <button class="lat lat--khafi" data-lat="khafi" aria-pressed="false">
+          <span class="lat__dot"></span>
+          <span class="lat__cap"><i dir="rtl" lang="ar">خفی</i><u>Khafi</u></span>
+        </button>
+        <button class="lat lat--akhfa" data-lat="akhfa" aria-pressed="false">
+          <span class="lat__dot"></span>
+          <span class="lat__cap"><i dir="rtl" lang="ar">اخفیٰ</i><u>Akhfa</u></span>
+        </button>
+        <button class="lat lat--qalb" data-lat="qalb" aria-pressed="true">
+          <span class="lat__dot"></span>
+          <span class="lat__cap"><i dir="rtl" lang="ar">قلب</i><u>Qalb</u></span>
+        </button>
+        <button class="lat lat--ruh" data-lat="ruh" aria-pressed="false">
+          <span class="lat__dot"></span>
+          <span class="lat__cap"><i dir="rtl" lang="ar">روح</i><u>Ruh</u></span>
+        </button>
+      </div>
+
+      <div class="lat__read" aria-live="polite">
+        <h3 dir="rtl" lang="ar" id="latAr">قلب</h3>
+        <p class="lat__tl" id="latTl">Qalb — the heart</p>
+        <ul class="lat__meta" id="latMeta">
+          <li><b>Seat</b>two fingers below the left breast</li>
+          <li><b>Colour</b><span class="lat__swatch" style="color:var(--qalb)"></span>yellow</li>
+          <li><b>Attributed to</b>Adam</li>
+        </ul>
+        <p class="lat__text" id="latText">Where the work begins. Remembrance is placed here first and held until it continues without the disciple's effort.</p>
+      </div>
+    </div>
+
+    <div class="lataif__foot">
+      <p class="fine">The five belong to the <em>ʿalam al-amr</em>, the world of command. Beyond them the disciplines continue through the nafs and the four elements to <em>sultan al-adhkar</em> — remembrance in the whole body, no part of it left outside.</p>
+      <div class="tbc">
+        <b>Read before practising</b>
+        Seats and colours follow the Mujaddidi scheme, and branches differ on the order of the last two. Nothing set down here replaces a shaykh's instruction, and the lataif are not taken up without one.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MAMULAT — before the light ═════════════════════════════ -->
+<section class="band band--night" id="practice">
+  <div class="wrap">
+    <p class="label">Daily</p>
+    <h2 class="h-ur" dir="rtl" lang="ur">معمولاتِ سیفیہ</h2>
+    <p class="h2">Mamulat-e-Saifia</p>
+    <p class="lead">What a Saifi disciple is asked to keep, from the last third of the night through the rest of the day.</p>
+
+    <ul class="mamul">
+      <li class="mamul__item">
+        <p class="mamul__when">Last third of the night</p>
+        <div>
+          <p class="mamul__ur" dir="rtl" lang="ur">مراقبہ</p>
+          <p class="mamul__tl">Muraqaba</p>
+          <p class="mamul__body">Fifteen to thirty minutes of silent sitting after Tahajjud. The nafs is brought under inspection and measured against what has been commanded — not an emptying of the mind, but an accounting.</p>
+        </div>
+      </li>
+      <li class="mamul__item">
+        <p class="mamul__when">Silent, in the heart</p>
+        <div>
+          <p class="mamul__ur" dir="rtl" lang="ur">ذکرِ قلبی</p>
+          <p class="mamul__tl">Qalbi zikr</p>
+          <p class="mamul__body">Remembrance placed in the heart rather than on the tongue. Nobody beside you hears it. This is the Naqshbandi mark, and the reason a room of Saifi salikeen at zikr can be almost quiet.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ FAJR — the light arrives ═══════════════════════════════ -->
+<div class="band dawnband band--nolamp">
+  <div class="wrap wrap--strip">
+    <div class="fajr">
+      <p class="fajr__ur" dir="rtl" lang="ur">فجر</p>
+      <span class="fajr__rule"></span>
+      <p class="fajr__tx">Fajr — the light arrives</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MAMULAT — after the light ══════════════════════════════ -->
+<section class="band band--paper band--nolamp" aria-label="Daily practice, continued">
+  <div class="wrap wrap--follow">
+    <ul class="mamul">
+      <li class="mamul__item">
+        <p class="mamul__when">With the shaykh</p>
+        <div>
+          <p class="mamul__ur" dir="rtl" lang="ur">رابطہ</p>
+          <p class="mamul__tl">Rabita</p>
+          <p class="mamul__body">An inner connection kept with the shaykh, living or departed, through which guidance is understood to pass. Held quietly through the day's ordinary work.</p>
+        </div>
+      </li>
+      <li class="mamul__item">
+        <p class="mamul__when">Every day, without missing</p>
+        <div>
+          <p class="mamul__ur" dir="rtl" lang="ur">سلسلہ و مناجات</p>
+          <p class="mamul__tl">Silsila and Munajat</p>
+          <p class="mamul__body">The chain of masters recited from the present back to the Prophet <span class="saw">ﷺ</span>, and supplication after it. The disciple says the names daily so as to stand in a line rather than alone.</p>
+        </div>
+      </li>
+      <li class="mamul__item">
+        <p class="mamul__when">At the khanqah</p>
+        <div>
+          <p class="mamul__ur" dir="rtl" lang="ur">مجلسِ ذکر</p>
+          <p class="mamul__tl">Majlis-e-zikr</p>
+          <p class="mamul__body">Gathered remembrance, held together. Followers describe states of wajd in these sittings under Sarkar Mubarak. Times are set by each centre.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══ FOUNDER ════════════════════════════════════════════════ -->
+<section class="band band--paper" id="founder">
+  <div class="wrap">
+    <p class="label">The founder</p>
+    <h2 class="h-ur" dir="rtl" lang="ur">اخوندزادہ پیر سیف الرحمٰن مبارک</h2>
+    <p class="h2">Sarkar Mubarak</p>
+    <p class="founder__dates">20 Muharram 1344 &middot; 10 August 1925 &nbsp;—&nbsp; 14 Rajab 1431 &middot; 27 June 2010</p>
+
+    <p>He was born in Baba Kalai, a village some twenty kilometres from Jalalabad, and had the Qur'an from his father. In the early 1940s he went to Peshawar for tafseer, hadith, usul al-fiqh, aqeeda and tajweed. He was around thirty when he gave bay'ah to Shah Rasul Thaqalayni and was set to silent remembrance.</p>
+
+    <p>Maulana Muhammad Hashim Samangani completed that training and granted him autonomous khilafat. He taught in Archi and left Afghanistan before the war reached it. In Bara he built a masjid, a Dar-ul-Ulum and a khanqah — and that is counted as the founding of the Saifia. He held to one condition throughout: the Sunnah first, and no spiritual practice standing apart from it.</p>
+
+    <div class="register">
+      <div class="register__row">
+        <p class="reg__yr">1344 AH &middot; 1925</p>
+        <p class="reg__pl">Baba Kalai</p>
+        <p class="reg__tx">Born near Jalalabad. First instruction, and the Qur'an, from his father.</p>
+      </div>
+      <div class="register__row">
+        <p class="reg__yr">Early 1940s</p>
+        <p class="reg__pl">Peshawar</p>
+        <p class="reg__tx">Formal study in tafseer, hadith, usul al-fiqh, aqeeda and tajweed.</p>
+      </div>
+      <div class="register__row">
+        <p class="reg__yr">c. 1955</p>
+        <p class="reg__pl">Bay'ah</p>
+        <p class="reg__tx">Allegiance to Shah Rasul Thaqalayni, and initiation into silent dhikr.</p>
+      </div>
+      <div class="register__row">
+        <p class="reg__yr">1387 AH &middot; 1967</p>
+        <p class="reg__pl">Khilafat</p>
+        <p class="reg__tx">Granted autonomously by Muhammad Hashim Samangani. Separately, khilafat in the Qadri line through Sheikh Haji Pachero.</p>
+      </div>
+      <div class="register__row">
+        <p class="reg__yr">Before 1978</p>
+        <p class="reg__pl">Archi</p>
+        <p class="reg__tx">A mosque and Dars-e-Nizami in Afghanistan — from which the name Peer-e-Archi.</p>
+      </div>
+      <div class="register__row">
+        <p class="reg__yr">1978</p>
+        <p class="reg__pl">Pir Sabaq</p>
+        <p class="reg__tx">Left Afghanistan ahead of the war. Three years of guidance here.</p>
+      </div>
+      <div class="register__row">
+        <p class="reg__yr">1409 AH &middot; 1989</p>
+        <p class="reg__pl">Bara</p>
+        <p class="reg__tx">Masjid, Dar-ul-Ulum and khanqah — the founding of the Silsila-e-Saifia.</p>
+      </div>
+      <div class="register__row">
+        <p class="reg__yr">1431 AH &middot; 2010</p>
+        <p class="reg__pl">Ravi Rehan Shareef</p>
+        <p class="reg__tx">Died 14 Rajab. The order's khanqah stands here, outside Lahore.</p>
+      </div>
+    </div>
+
+    <dl class="names">
+      <div><dt>Sarkar Mubarak</dt><dd>The blessed master. The name most used among salikeen.</dd></div>
+      <div><dt>Peer-e-Archi</dt><dd>For the district in Afghanistan where he first taught.</dd></div>
+      <div><dt>Shah-e-Khurasan</dt><dd>King of Khurasan — the old name for the country he came from.</dd></div>
+      <div><dt>Hazrat Sahib</dt><dd>How he was addressed inside the khanqah.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ═══ THE GOLDEN CHAIN ═══════════════════════════════════════ -->
+<section class="band band--paper" id="chain">
+  <div class="wrap">
+    <p class="label">Recited daily</p>
+    <h2 class="h-ur" dir="rtl" lang="ur">سلسلۂ ذہب</h2>
+    <p class="h2">The Golden Chain</p>
+    <p class="lead">Authority in a Sufi order rests on transmission — an unbroken line of masters reaching back to the Prophet <span class="saw">ﷺ</span>. Saifi disciples say it every day, and follow it with munajat.</p>
+
+    <ol class="chain">
+      <li><p class="chain__nm">Muhammad&nbsp;<span class="saw">ﷺ</span></p></li>
+      <li><p class="chain__nm">Abu Bakr as-Siddiq<span class="ar" dir="rtl" lang="ar">رضی اللہ عنہ</span></p></li>
+      <li><p class="chain__nm">Salman al-Farsi<span class="ar" dir="rtl" lang="ar">رضی اللہ عنہ</span></p></li>
+      <li class="gap"><p>the chain continues</p></li>
+      <li><p class="chain__nm">Bayazid al-Bastami</p></li>
+      <li><p class="chain__nm">Abdul Khaliq Ghijduwani</p></li>
+      <li><p class="chain__nm">Baha-ud-Din Naqshband Bukhari<span>from whom the order takes its name</span></p></li>
+      <li><p class="chain__nm">Ahmad Sirhindi<span>Mujaddid Alf-e-Thani</span></p></li>
+      <li class="gap"><p>the chain continues</p></li>
+      <li><p class="chain__nm">Shah Rasul Thaqalayni</p></li>
+      <li><p class="chain__nm">Muhammad Hashim Samangani</p></li>
+      <li><p class="chain__nm">Saif-ur-Rahman Mubarak<span>Sarkar Mubarak</span></p></li>
+    </ol>
+
+    <div class="tbc">
+      <b>The full chain</b>
+      Every name, in its place, is set out in the <a class="act" href="#intro">introduction above</a>. What's recited daily follows the same order, taught in full at the khanqah.
+    </div>
+  </div>
+</section>
+
+<!-- ═══ KHANQAH ════════════════════════════════════════════════ -->
+<section class="band band--paper" id="khanqah">
+  <div class="wrap">
+    <p class="label">Where</p>
+    <h2 class="h-ur" dir="rtl" lang="ur">خانقاہ</h2>
+    <p class="h2">Ravi Rehan Shareef</p>
+    <p class="lead">The order's khanqah stands at Lakhoder, on the Ravi, outside Lahore. It keeps the gatherings and the founder's resting place, and it is the address for everything the order does.</p>
+
+    <figure class="khanqah__photo">
+      <img src="mazaar.jpeg" alt="The mazaar at Ravi Rehan Shareef" loading="lazy">
+    </figure>
+
+    <div class="khanqah">
+      <div>
+        <h3 class="h3">Visiting</h3>
+        <address class="addr"><b>Astana Aliya Muhammadia Saifi</b><br>Ravi Rehan Shareef, Lakhoder<br>Lahore, Punjab, Pakistan</address>
+        <div class="tbc"><b>Gathering times</b>Zikr is held at the khanqah, but the weekly schedule is set locally and is not published here yet.</div>
+      </div>
+
+      <div>
+        <h3 class="h3">Urs of Sarkar Mubarak</h3>
+        <p class="addr">Commemorated on <b>14 Rajab</b>. Because the date is Hijri, the Gregorian day moves each year.</p>
+        <div class="tbc"><b>This year's programme</b>Dates and the order of the sittings come from the khanqah closer to the time.</div>
+      </div>
+
+      <div>
+        <h3 class="h3">Salikeen elsewhere</h3>
+        <p class="addr">Gatherings are kept by Saifi salikeen in:</p>
+        <ul class="reach">
+          <li>Pakistan</li><li>Afghanistan</li><li>United Kingdom</li><li>Norway</li>
+          <li>Europe</li><li>United States</li><li>Canada</li><li>India</li>
+          <li>Bangladesh</li><li>Fiji</li><li>Middle East</li>
+        </ul>
+        <div class="tbc"><b>Addresses</b>Centres outside Pakistan are put in touch through the khanqah rather than listed publicly.</div>
+      </div>
+
+      <div>
+        <h3 class="h3">Writing to the khanqah</h3>
+        <p class="addr">Enquiries about bay'ah, visiting, or the order's books are answered from Ravi Rehan Shareef.</p>
+        <div class="tbc"><b>Contact details</b>An email address and a phone number still need confirming before they go on the page.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER & COLOPHON ══════════════════════════════════════ -->
+<footer class="band band--night">
+  <div class="wrap wrap--tight">
+    <div class="foot__top">
+      <div>
+        <p class="foot__ur" dir="rtl" lang="ur">سلسلہ سیفیہ</p>
+        <p class="fine" style="margin-top:var(--s2)">Naqshbandi &middot; Mujaddidi &middot; Saifi</p>
+      </div>
+      <ul class="foot__nav">
+        <li><a href="#intro">Introduction</a></li>
+        <li><a href="#path">The path</a></li>
+        <li><a href="#lataif">The work</a></li>
+        <li><a href="#practice">Daily practice</a></li>
+        <li><a href="#founder">The founder</a></li>
+        <li><a href="#chain">The chain</a></li>
+        <li><a href="#khanqah">Khanqah</a></li>
+      </ul>
+    </div>
+
+    <div class="colophon">
+      <h2>Colophon — how this page is set</h2>
+      <div class="col__grid">
+        <div>
+          <h3>Colour</h3>
+          <ul class="sw">
+            <li style="background:var(--qalb)"></li>
+            <li style="background:var(--ruh)"></li>
+            <li style="background:var(--sirr)"></li>
+            <li style="background:var(--khafi)"></li>
+            <li style="background:var(--akhfa)"></li>
+            <li style="background:var(--gold)"></li>
+          </ul>
+          <p>The five accents are the traditional colours of the lataif and appear nowhere but the lataif. Gold is kept for the chain and for light. The ground runs from a warm night to parchment, turning at Fajr.</p>
+        </div>
+        <div>
+          <h3>Type</h3>
+          <ul class="type-spec">
+            <li><b dir="rtl" lang="ur" style="font-family:var(--nastaliq)">نستعلیق</b><span>Gulzar — Urdu display</span></li>
+            <li><b dir="rtl" lang="ar" style="font-family:var(--naskh)">نسخ</b><span>Amiri — Arabic invocation</span></li>
+            <li><b>Spectral</b><span>Latin — headings and text</span></li>
+          </ul>
+          <p>Urdu leads and English follows, sharing a left edge. Arabic invocation is always naskh; Urdu content is always nastaliq.</p>
+        </div>
+        <div>
+          <h3>Noor</h3>
+          <p>Every band is lit from its own top edge, the way light falls through the oculus of a dome. In the hero the light of each inherited order runs down its own strand and gathers at the knot, one after another.</p>
+        </div>
+        <div>
+          <h3>Structure</h3>
+          <p>Only one thing on this page is drawn as a sequence, because only one thing is one: the golden chain. The founder's life is set as a register of places, and everything else stands on its own.</p>
+        </div>
+      </div>
+
+      <p class="legal">Compiled from public sources for design purposes. Several details — the order's current leadership, gathering times, contact addresses and the full golden chain — are marked as awaiting confirmation and must be settled with the khanqah before this page is published.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* The lataif reader. Five centres, one panel. */
+(function(){
+  var DATA = {
+    qalb:{ar:"قلب", tl:"Qalb — the heart", seat:"two fingers below the left breast",
+      colour:"yellow", swatch:"var(--qalb)", prophet:"Adam",
+      text:"Where the work begins. Remembrance is placed here first and held until it continues without the disciple's effort."},
+    ruh:{ar:"روح", tl:"Ruh — the spirit", seat:"two fingers below the right breast",
+      colour:"red", swatch:"var(--ruh)", prophet:"Noah and Abraham",
+      text:"Opened once the heart is settled. The attention lifts off the self and turns toward what gave it life."},
+    sirr:{ar:"سرّ", tl:"Sirr — the secret", seat:"two fingers above the left breast",
+      colour:"white", swatch:"var(--sirr)", prophet:"Moses",
+      text:"Secret not because it is withheld from others, but because nothing besides Allah is admitted into it."},
+    khafi:{ar:"خفی", tl:"Khafi — the hidden", seat:"two fingers above the right breast",
+      colour:"black", swatch:"var(--khafi)", prophet:"Jesus",
+      text:"The dimmest of the five and the least described. It is known by the shaykh's report of it, not by the disciple's account."},
+    akhfa:{ar:"اخفیٰ", tl:"Akhfa — the most hidden", seat:"the centre of the chest",
+      colour:"green", swatch:"var(--akhfa)", prophet:"Muhammad ﷺ",
+      text:"The last of the five. Past it the work turns to the nafs, then to the whole body, until nothing is left outside the remembrance."}
+  };
+
+  var btns = Array.prototype.slice.call(document.querySelectorAll('.lat'));
+  var ar   = document.getElementById('latAr');
+  var tl   = document.getElementById('latTl');
+  var meta = document.getElementById('latMeta');
+  var text = document.getElementById('latText');
+
+  function show(key){
+    var d = DATA[key]; if(!d) return;
+    btns.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.lat === key)); });
+    ar.textContent   = d.ar;
+    tl.textContent   = d.tl;
+    text.textContent = d.text;
+    meta.innerHTML =
+      '<li><b>Seat</b>' + d.seat + '</li>' +
+      '<li><b>Colour</b><span class="lat__swatch" style="color:' + d.swatch + '"></span>' + d.colour + '</li>' +
+      '<li><b>Attributed to</b>' + d.prophet + '</li>';
+  }
+
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){ show(b.dataset.lat); });
+  });
+})();
+</script>
+
+<script>
+/* The confluence list and the golden chain settle into place as
+   they're reached. Skipped entirely if the browser can't observe
+   intersections or the visitor asked for less motion — content
+   is never hidden from a page that can't reveal it. */
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  document.documentElement.classList.add('js-reveal');
+
+  var targets = document.querySelectorAll('.lineup__item, .chain--long li');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {rootMargin:'0px 0px -8% 0px', threshold:.1});
+
+  targets.forEach(function(t){ io.observe(t); });
+})();
+</script>
+
+</body>
+</html>
