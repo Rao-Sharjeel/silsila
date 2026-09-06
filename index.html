@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Silsila-e-Saifia — سلسلہ سیفیہ</title>
 <meta name="description" content="A Sufi order of the Naqshbandi Mujaddidi tradition, founded by Akhundzada Peer Saif-ur-Rahman Mubarak. Daily practice, lineage, and the khanqah at Ravi Rehan Shareef.">
+<link rel="icon" type="image/png" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Gulzar&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
@@ -53,6 +54,8 @@
   --sirr:  #F2ECDC;   /* secret       — white  */
   --khafi: #5A5280;   /* hidden       — black  */
   --akhfa: #1F7A60;   /* most hidden  — green  */
+  --nafsi: #9C6B3E;   /* the self     — clay   */
+  --qalabi:#8C8676;   /* the mould    — earth/water/air/fire */
 
   /* ── Measure ── */
   --gutter: clamp(1.25rem, 5vw, 5rem);
@@ -367,7 +370,7 @@ a{color:inherit}
 .chain--long li.chain--first .chain__nm b{
   font-family:var(--latin);color:var(--accent);font-size:.78rem;
 }
-.chain--long li.chain--first .saw{display:block;margin-top:.3em;font-size:1.35em}
+.chain--long li.chain--first .saw{display:block;margin-top:.3em;font-size:1.1em}
 .chain--long li.chain--first::after{
   width:12px;height:12px;left:-1px;top:.35em;
   background:var(--gold-lit);box-shadow:0 0 18px 4px rgba(210,171,90,.65);
@@ -378,6 +381,23 @@ a{color:inherit}
   transition:opacity .6s ease,transform .6s ease;
 }
 .js-reveal .chain--long li.is-visible{opacity:1;transform:none}
+
+/* ═══ IMPORTANT CONCEPTS ════════════════════════════════════════ */
+.concepts{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:var(--s6);margin:var(--s7) 0 0;max-width:70rem}
+.concept{padding:var(--s6) var(--s5);border:1px solid var(--rule);border-radius:2px;transition:border-color .3s ease}
+.concept:hover{border-color:var(--gold)}
+.concept__num{font-family:var(--latin);font-size:.78rem;letter-spacing:.14em;color:var(--accent);margin:0 0 var(--s3);font-variant-numeric:lining-nums}
+.concept__title{font-size:1.12rem;font-weight:500;margin:0 0 var(--s2);color:var(--fg)}
+.concept__body{font-size:.92rem;line-height:1.62;color:var(--mute);margin:0}
+
+.js-reveal .concept{opacity:0;transform:translateY(12px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.js-reveal .concept.is-visible{opacity:1;transform:none}
+.concept:nth-child(2){transition-delay:.05s}
+.concept:nth-child(3){transition-delay:.1s}
+.concept:nth-child(4){transition-delay:.15s}
+.concept:nth-child(5){transition-delay:.2s}
+.concept:nth-child(6){transition-delay:.25s}
+.concept:nth-child(7){transition-delay:.3s}
 
 /* ═══ FOUR ORDERS ═══════════════════════════════════════════════ */
 
@@ -429,6 +449,61 @@ a{color:inherit}
 .lat__swatch{display:inline-block;width:.6rem;height:.6rem;border-radius:50%;background:currentColor;margin-right:.4em;box-shadow:0 0 0 1px rgba(239,231,212,.25)}
 .lat__text{font-size:1.02rem;line-height:1.68;color:var(--fg);max-width:26rem;margin:0}
 .lataif__foot{margin-top:var(--s9);max-width:36rem}
+
+/* ═══ ZIKAR ═════════════════════════════════════════════════════ */
+
+.zk-select{display:flex;flex-wrap:wrap;gap:var(--s4);margin-top:var(--s8)}
+.zk-tab{display:flex;flex-direction:column;align-items:flex-start;gap:.3em;border:1px solid var(--rule);background:transparent;padding:var(--s3) var(--s5);border-radius:2px;cursor:pointer;text-align:left;transition:border-color .25s ease,background .25s ease}
+.zk-tab i{font-family:var(--naskh);font-style:normal;font-size:1.15rem;line-height:1.3;color:var(--fg)}
+.zk-tab u{text-decoration:none;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);opacity:.75;transition:color .25s ease,opacity .25s ease}
+.zk-tab:hover{border-color:var(--gold)}
+.zk-tab[aria-pressed="true"]{border-color:var(--gold);background:var(--noor)}
+.zk-tab[aria-pressed="true"] u{color:var(--gold-lit);opacity:1}
+
+.zk-panel{margin-top:var(--s9)}
+.zk-panel[hidden]{display:none}
+
+.zk-subtabs{display:flex;flex-wrap:wrap;gap:0 var(--s6);margin-bottom:var(--s7)}
+.zk-subtab{border:0;border-bottom:2px solid transparent;background:none;padding:.4em 0;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);cursor:pointer;transition:color .25s ease,border-color .25s ease}
+.zk-subtab:hover{color:var(--fg)}
+.zk-subtab[aria-pressed="true"]{color:var(--gold-lit);border-bottom-color:var(--gold)}
+.zk-sub[hidden]{display:none}
+
+.zlat--qalb  {color:var(--qalb);  left:50%; top:9%}
+.zlat--ruh   {color:var(--ruh);   left:81%; top:24%}
+.zlat--sirr  {color:var(--sirr);  left:89%; top:59%}
+.zlat--khafi {color:var(--khafi); left:67%; top:87%}
+.zlat--akhfa {color:var(--akhfa); left:33%; top:87%}
+.zlat--nafsi {color:var(--nafsi); left:11%; top:59%}
+.zlat--qalabi{color:var(--qalabi);left:19%; top:24%}
+
+.zk-nafi__list{list-style:none;margin:0 0 var(--s6);padding:0;max-width:34rem}
+.zk-nafi__list li{padding:var(--s3) 0;border-top:1px solid var(--rule);font-size:.96rem;line-height:1.6;color:var(--fg)}
+.zk-nafi__list li:first-child{border-top:0}
+.zk-nafi__list b{display:block;font-family:var(--naskh);font-size:1.15rem;font-weight:400;margin-bottom:.2em;color:var(--gold-lit)}
+
+.zk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(2.7rem,1fr));gap:.55rem;max-width:38rem;margin:0}
+.zk-grid--9{max-width:24rem}
+.zk-num{aspect-ratio:1/1;border:1px solid var(--rule);background:transparent;color:var(--mute);font-family:var(--latin);font-size:.85rem;border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .2s ease,color .2s ease,background .2s ease}
+.zk-num:hover{border-color:var(--gold);color:var(--fg)}
+.zk-num[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--night)}
+
+.zk-detail{margin-top:var(--s7);padding-top:var(--s6);border-top:1px solid var(--rule);max-width:36rem;min-height:9rem}
+.zk-detail__label{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 var(--s3)}
+.zk-detail__ar{font-family:var(--naskh);text-align:left;font-size:1.3rem;line-height:2;color:var(--fg);margin:0 0 var(--s3)}
+.zk-detail__tr{font-size:.98rem;line-height:1.62;color:var(--fg);margin:0 0 var(--s3);font-style:italic}
+.zk-detail__note{font-size:.92rem;line-height:1.65;color:var(--mute);margin:0}
+
+/* Numbered-button grid + reading, side by side once there's room */
+@media (min-width:56rem){
+  .zk-cols{display:grid;grid-template-columns:minmax(0,23rem) minmax(0,28rem);gap:0 var(--s8);align-items:start}
+  .zk-cols--9{grid-template-columns:minmax(0,15rem) minmax(0,28rem)}
+  .zk-cols .zk-grid{max-width:none;margin:0}
+  .zk-cols .zk-detail{margin-top:0;padding-top:0;padding-left:var(--s7);border-top:0;border-left:1px solid var(--rule);min-height:0}
+}
+
+.zk-istighfar__ar{font-family:var(--naskh);text-align:left;font-size:1.25rem;line-height:1.9;color:var(--fg);margin:var(--s2) 0 var(--s3)}
+.zk-sub-label{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 var(--s4)}
 
 /* ═══ MAMULAT ═══════════════════════════════════════════════════
    Two bands with a dawn strip between them, rather than one long
@@ -486,7 +561,7 @@ a{color:inherit}
 .chain li::after{content:"";position:absolute;left:0;top:1.2em;width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px 1px rgba(176,139,62,.5)}
 .chain__nm{font-size:1.06rem;font-weight:400;margin:0;line-height:1.45}
 .chain__nm span{display:block;color:var(--mute);font-size:.86rem;margin-top:.1em}
-.chain__nm span.ar{font-size:1.15rem;line-height:1.5;margin-top:0}
+.chain__nm span.ar{font-size:.86rem;line-height:1.4;margin-top:.15em}
 .chain li.gap{padding-block:var(--s5)}
 .chain li.gap::after{display:none}
 .chain li.gap p{font-size:.71rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);margin:0}
@@ -533,26 +608,14 @@ a{color:inherit}
 .addr b{font-weight:500;color:var(--fg)}
 .reach{columns:2;column-gap:var(--s6);list-style:none;margin:var(--s4) 0 0;padding:0;font-size:.95rem;line-height:1.9;color:var(--mute)}
 
-/* ═══ FOOTER & COLOPHON ═════════════════════════════════════════ */
+/* ═══ FOOTER ═════════════════════════════════════════════════════ */
 
 .foot__top{display:flex;flex-wrap:wrap;gap:var(--s6) var(--s8);justify-content:space-between;align-items:flex-end;padding-bottom:var(--s7);border-bottom:1px solid var(--rule)}
 .foot__ur{font-family:var(--nastaliq);text-align:left;font-size:2.2rem;line-height:1.8;font-weight:500;margin:0}
 .foot__nav{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s6);list-style:none;margin:0;padding:0;font-size:.86rem;letter-spacing:.08em}
 .foot__nav a{text-decoration:none;color:var(--mute);transition:color .2s ease}
 .foot__nav a:hover{color:var(--fg)}
-
-.colophon{padding-top:var(--s8)}
-.colophon h2{font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);font-weight:500;margin:0 0 var(--s6)}
-.col__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:var(--s7);max-width:64rem}
-.col__grid h3{font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:var(--fg);margin:0 0 var(--s3)}
-.col__grid p{font-size:.85rem;line-height:1.65;margin:0;color:var(--mute);max-width:23rem}
-.sw{display:flex;flex-wrap:wrap;gap:var(--s3);margin:0 0 var(--s4);padding:0;list-style:none}
-.sw li{width:1.5rem;height:1.5rem;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(239,231,212,.2)}
-.type-spec{list-style:none;margin:0 0 var(--s4);padding:0}
-.type-spec li{margin-bottom:var(--s3)}
-.type-spec b{display:block;font-weight:400;font-size:1.2rem;line-height:1.6;text-align:left}
-.type-spec span{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
-.legal{margin-top:var(--s9);padding-top:var(--s5);border-top:1px solid var(--rule);font-size:.78rem;line-height:1.7;color:var(--mute);max-width:44rem}
+.foot__note{margin-top:var(--s6);font-size:.78rem;letter-spacing:.03em;color:var(--mute)}
 
 /* ═══ RESPONSIVE ════════════════════════════════════════════════ */
 
@@ -740,7 +803,7 @@ a{color:inherit}
         <p class="intro__chain-note">Thirty-six links, master to disciple, from the Prophet <span class="saw">ﷺ</span> to Sarkar Mubarak.</p>
 
         <ol class="chain chain--long">
-          <li class="chain--first"><p class="chain__nm">Hazrat Muhammad Mustafa&nbsp;<b>632</b><span class="saw">ﷺ</span></p></li>
+          <li class="chain--first"><p class="chain__nm">Hazrat Muhammad Mustafaخاتم النبیین&nbsp;<b>632</b><span class="saw">ﷺ</span></p></li>
           <li><p class="chain__nm">Abu Bakr as-Siddiq&nbsp;<b>634</b><span class="ar" dir="rtl" lang="ar">رضی اللہ عنہ</span></p></li>
           <li><p class="chain__nm">Salman al-Farsi&nbsp;<b>654</b><span class="ar" dir="rtl" lang="ar">رضی اللہ عنہ</span></p></li>
           <li><p class="chain__nm">Qasim ibn Muhammad ibn Abi Bakr&nbsp;<b>101 AH</b></p></li>
@@ -778,7 +841,7 @@ a{color:inherit}
           <!-- <li><p class="chain__nm">Saif-ur-Rahman Mubarak&nbsp;<b>2010</b><span>Sarkar Mubarak</span></p></li> -->
           <li class="chain--first"><p class="chain__nm">Saif-ur-Rahman Mubarak&nbsp;<b>2010</b><span class="saw">Peer-e-Archi Sarkar</span></p></li>
           <li><p class="chain__nm"><h3>Sarkar Peer Mian Muhammad Mubarak Hanafi Saifi</h3><b></b></p></li>
-          <li><p class="chain__nm"><h3>Sarkar Peer Muhammad Akhtar Rasool Hanafi Saifi Sahib</h3><b></b></p></li>
+          <li><p class="chain__nm"><h3>Sarkar Peer Muhammad Akhtar Rasool Muhammadi Saifi Sahib</h3><b></b></p></li>
 
 
 
@@ -793,7 +856,208 @@ a{color:inherit}
   </div>
 </section>
 
-<!-- ═══ FOUR ORDERS ════════════════════════════════════════════ -->
+<!-- ═══ ZIKAR ══════════════════════════════════════════════════ -->
+<section class="band band--night" id="zikar">
+  <div class="wrap">
+    <p class="label">The remembrance</p>
+    <h2 class="h-ur" dir="rtl" lang="ur">اذکارِ اربعہ</h2>
+    <p class="h2">The Zikar of the four Silsilas</p>
+    <p class="lead">A Saifi disciple does not inherit one order's remembrance but four. Select a silsila to see how its zikr is kept — drawn from <em>Mamulat-e-Saifia</em>, as taught to enrolled disciples.</p>
+
+    <div class="zk-select" role="group" aria-label="Select a silsila">
+      <button class="zk-tab" data-zk="naqshbandi" aria-pressed="true">
+        <i dir="rtl" lang="ar">النقشبندية</i><u>Naqshbandiyya</u>
+      </button>
+      <button class="zk-tab" data-zk="qadiri" aria-pressed="false">
+        <i dir="rtl" lang="ar">القادرية</i><u>Qadiriyya</u>
+      </button>
+      <button class="zk-tab" data-zk="chishti" aria-pressed="false">
+        <i dir="rtl" lang="ar">الچشتية</i><u>Chishtiyya</u>
+      </button>
+      <button class="zk-tab" data-zk="suhrawardi" aria-pressed="false">
+        <i dir="rtl" lang="ar">السهروردية</i><u>Suhrawardiyya</u>
+      </button>
+    </div>
+
+    <!-- NAQSHBANDIYYA ................................................ -->
+    <div class="zk-panel" id="zkPanel-naqshbandi">
+      <div class="zk-subtabs" role="group" aria-label="Naqshbandi zikr — choose a practice">
+        <button class="zk-subtab" data-sub="lataif" aria-pressed="true">Lataif</button>
+        <button class="zk-subtab" data-sub="nafi" aria-pressed="false">Nafi Isbat</button>
+        <button class="zk-subtab" data-sub="muraqabat" aria-pressed="false">Muraqabat</button>
+      </div>
+
+      <div class="zk-sub" id="zkSub-lataif">
+        <p class="fine" style="margin-bottom:var(--s6)">Seven centres rather than five — the two of <em>ʿalam al-khalq</em>, the self and the body, taken up after the five of <em>ʿalam al-amr</em> are settled.</p>
+        <div class="lataif">
+          <div class="lataif__figure" role="group" aria-label="The seven lataif — select one to read about it">
+            <button class="lat zlat--qalb" data-zlat="qalb" aria-pressed="true">
+              <span class="lat__dot"></span>
+              <span class="lat__cap"><i dir="rtl" lang="ar">قلب</i><u>Qalb</u></span>
+            </button>
+            <button class="lat zlat--ruh" data-zlat="ruh" aria-pressed="false">
+              <span class="lat__dot"></span>
+              <span class="lat__cap"><i dir="rtl" lang="ar">روح</i><u>Ruh</u></span>
+            </button>
+            <button class="lat zlat--sirr" data-zlat="sirr" aria-pressed="false">
+              <span class="lat__dot"></span>
+              <span class="lat__cap"><i dir="rtl" lang="ar">سرّ</i><u>Sirr</u></span>
+            </button>
+            <button class="lat zlat--khafi" data-zlat="khafi" aria-pressed="false">
+              <span class="lat__dot"></span>
+              <span class="lat__cap"><i dir="rtl" lang="ar">خفی</i><u>Khafi</u></span>
+            </button>
+            <button class="lat zlat--akhfa" data-zlat="akhfa" aria-pressed="false">
+              <span class="lat__dot"></span>
+              <span class="lat__cap"><i dir="rtl" lang="ar">اخفیٰ</i><u>Akhfa</u></span>
+            </button>
+            <button class="lat zlat--nafsi" data-zlat="nafsi" aria-pressed="false">
+              <span class="lat__dot"></span>
+              <span class="lat__cap"><i dir="rtl" lang="ar">نفسی</i><u>Nafsi</u></span>
+            </button>
+            <button class="lat zlat--qalabi" data-zlat="qalabi" aria-pressed="false">
+              <span class="lat__dot"></span>
+              <span class="lat__cap"><i dir="rtl" lang="ar">قالبی</i><u>Qalabi</u></span>
+            </button>
+          </div>
+          <div class="lat__read" aria-live="polite">
+            <h3 dir="rtl" lang="ar" id="zlatAr">قلب</h3>
+            <p class="lat__tl" id="zlatTl">Qalb — the heart</p>
+            <ul class="lat__meta" id="zlatMeta">
+              <li><b>Seat</b>two fingers below the left breast</li>
+              <li><b>Colour</b><span class="lat__swatch" style="color:var(--qalb)"></span>yellow</li>
+              <li><b>Attributed to</b>Adam</li>
+            </ul>
+            <p class="lat__text" id="zlatText">Where the work begins. Remembrance is placed here first and held until it continues without effort.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="zk-sub" id="zkSub-nafi" hidden>
+        <p class="lead">The Naqshbandi zikr proper: the kalima's negation and affirmation, circulated silently through the body rather than spoken aloud. Breath is held from below the navel; <span dir="rtl" lang="ar">لا</span> is drawn up and out to the shoulders as negation, clearing the heart of everything but Allah; <span dir="rtl" lang="ar">اِلَّا اللّٰہ</span> is then struck onto the qalb lataifa as affirmation — a single continuous circuit, not a straight line.</p>
+        <ul class="zk-nafi__list">
+          <li><b dir="rtl" lang="ar">لَا مَعْبُوْدَ اِلَّا اللّٰہ</b>There is no object of worship but Allah.</li>
+          <li><b dir="rtl" lang="ar">لَا مَقْصُوْدَ اِلَّا اللّٰہ</b>There is no aim but Allah.</li>
+          <li><b dir="rtl" lang="ar">لَا مَوْجُوْدَ اِلَّا اللّٰہ</b>There is nothing truly existent but Allah.</li>
+          <li><b dir="rtl" lang="ar">لَا مَطْلُوْبَ اِلَّا اللّٰہ</b>There is nothing sought but Allah.</li>
+        </ul>
+        <div class="tbc">
+          <b>Before beginning</b>
+          <p class="zk-istighfar__ar" dir="rtl" lang="ar">اللّٰهُمَّ يَا لَطِيْفَ الْاَحْفٰى اَنْتَ مَقْصُوْدِيْ وَرِضَاكَ مَطْلُوْبِيْ، اَعْطِنِيْ مَحَبَّتَكَ وَمَعْرِفَةَ ذَاتِكَ وَصِفَاتِكَ</p>
+          Read once, then held silently through the day's rounds. A thousand a day is the measure the mashaikh give.
+        </div>
+      </div>
+
+      <div class="zk-sub" id="zkSub-muraqabat" hidden>
+        <p class="fine" style="margin-bottom:var(--s6)">Thirty-six stations, walked in order under a shaykh's direction — from the five lataif themselves through to a station past every definition. Select one to read its niyyah.</p>
+        <div class="zk-cols">
+          <div class="zk-grid" id="zkMrqGrid" role="group" aria-label="Select one of the 36 muraqabat"></div>
+          <div class="zk-detail" aria-live="polite">
+            <p class="zk-detail__label" id="mrqLabel">1 · Qalb</p>
+            <p class="zk-detail__ar" dir="rtl" lang="ar" id="mrqAr"></p>
+            <p class="zk-detail__tr" id="mrqTr"></p>
+            <p class="zk-detail__note" id="mrqNote"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QADIRIYYA ..................................................... -->
+    <div class="zk-panel" id="zkPanel-qadiri" hidden>
+      <div class="tbc">
+        <b>Istighfar, first</b>
+        <p class="zk-istighfar__ar" dir="rtl" lang="ar">اَسْتَغْفِرُ اللّٰهَ الَّذِيْ لَآ اِلٰهَ اِلَّا هُوَ الْحَيُّ الْقَيُّوْمُ وَاَتُوْبُ اِلَيْهِ</p>
+        313 times daily, best after Tahajjud before true dawn, or after Asr if missed. It stands outside the nine asbaq proper, but the Qadiri Saifi mashaikh require it regardless.
+      </div>
+      <p class="zk-sub-label" style="margin-top:var(--s8)">The nine asbaq</p>
+      <div class="zk-cols zk-cols--9">
+        <div class="zk-grid zk-grid--9" id="zkQadGrid" role="group" aria-label="Select one of the nine Qadiri asbaq"></div>
+        <div class="zk-detail" aria-live="polite">
+          <p class="zk-detail__label" id="qadLabel"></p>
+          <p class="zk-detail__ar" dir="rtl" lang="ar" id="qadAr"></p>
+          <p class="zk-detail__tr" id="qadTr"></p>
+          <p class="zk-detail__note" id="qadNote"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHISHTIYYA .................................................... -->
+    <div class="zk-panel" id="zkPanel-chishti" hidden>
+      <p class="fine" style="margin-bottom:var(--s6)">Mirrors the Qadiri shape but opens from the opposite end, with <i dir="rtl" lang="ar">ہُوْ</i> rather than the negation-affirmation formula. Chishti muraqabat aren't fixed by day-count the way Naqshbandi ones are — Sarkar Mubarak had Chishti disciples draw on the Naqshbandi muraqabat instead of a separate sequence.</p>
+      <p class="zk-sub-label">The nine asbaq</p>
+      <div class="zk-cols zk-cols--9">
+        <div class="zk-grid zk-grid--9" id="zkChiGrid" role="group" aria-label="Select one of the nine Chishti asbaq"></div>
+        <div class="zk-detail" aria-live="polite">
+          <p class="zk-detail__label" id="chiLabel"></p>
+          <p class="zk-detail__ar" dir="rtl" lang="ar" id="chiAr"></p>
+          <p class="zk-detail__tr" id="chiTr"></p>
+          <p class="zk-detail__note" id="chiNote"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUHRAWARDIYYA ................................................. -->
+    <div class="zk-panel" id="zkPanel-suhrawardi" hidden>
+      <p class="lead">The Suhrawardi asbaq are identical to the Qadiriyya's nine, word for word — the same istighfar, the same nine lessons in the same order. The silsila's own character shows only in its muraqaba, which closes the sequence rather than sitting mid-way through it.</p>
+      <div class="tbc">
+        <b>The closing muraqaba</b>
+        Five to twenty minutes, no fixed upper limit. Facing Madina Munawwara, eyes closed: a straight road, on which the prophets, saints and angels of heaven and earth, the shaykhs of the silsila, and everyone present in the gathering are walking together. The intention is to visit, and to present that day's zikr as a gift at the Prophet's <span class="saw">ﷺ</span> threshold — forming a circle in his presence, offering the reward of the day's practice, asking leave to withdraw, then withdrawing backward out of respect rather than turning one's back, until home again, and the eyes open.
+      </div>
+    </div>
+
+    <p class="fine" style="margin-top:var(--s9);max-width:36rem">The counts, seats and sequence above follow <em>Mamulat-e-Saifia</em> as compiled for enrolled disciples. Nothing set down here replaces a shaykh's instruction, and none of this is taken up without one.</p>
+  </div>
+</section>
+
+<!-- ═══ IMPORTANT CONCEPTS ═════════════════════════════════════ -->
+<section class="band band--night" id="concepts">
+  <div class="wrap">
+    <p class="label">The foundations</p>
+    <h2 class="h-ur" dir="rtl" lang="ur">اہم اصول</h2>
+    <p class="h2">Seven principles every disciple keeps</p>
+    <p class="lead">Before the wird, before the muraqaba, these govern whether either bears fruit — the ground the rest of the practice is built on.</p>
+
+    <div class="concepts">
+      <article class="concept">
+        <p class="concept__num">01</p>
+        <h3 class="concept__title">Adab-e-Shaykh</h3>
+        <p class="concept__body">Respect and proper conduct toward one's Shaykh — trusting his direction, and following it without contest or complaint.</p>
+      </article>
+      <article class="concept">
+        <p class="concept__num">02</p>
+        <h3 class="concept__title">Pabandi-e-Salah</h3>
+        <p class="concept__body">Steadfastness in the five daily prayers, kept to their times without excuse.</p>
+      </article>
+      <article class="concept">
+        <p class="concept__num">03</p>
+        <h3 class="concept__title">Daily Zikr</h3>
+        <p class="concept__body">The given zikr, done as much as possible, every day — Allah loves the remembrance that is kept up consistently, however small.</p>
+      </article>
+      <article class="concept">
+        <p class="concept__num">04</p>
+        <h3 class="concept__title">Rabta</h3>
+        <p class="concept__body">The disciple's inward connection to the Shaykh, held in the heart and renewed daily — the channel through which faidh reaches him.</p>
+      </article>
+      <article class="concept">
+        <p class="concept__num">05</p>
+        <h3 class="concept__title">Gunahon se Bachna</h3>
+        <p class="concept__body">Guarding against sin — the heart cannot hold both light and heedlessness at once.</p>
+      </article>
+      <article class="concept">
+        <p class="concept__num">06</p>
+        <h3 class="concept__title">Tawakul</h3>
+        <p class="concept__body">Trust that Allah alone is enough — placing one's affairs in His hands after taking the lawful means.</p>
+      </article>
+      <article class="concept">
+        <p class="concept__num">07</p>
+        <h3 class="concept__title">Walidain ka Adab</h3>
+        <p class="concept__body">Respect and good conduct toward one's parents — a duty the Qur'an places beside the worship of Allah Himself.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOUR ORDERS ════════════════════════════════════════════
 <section class="band band--night" id="path">
   <div class="wrap">
     <p class="label">The path</p>
@@ -828,8 +1092,9 @@ a{color:inherit}
     <p class="converge__note">The four do not compete for the disciple. They are gathered, and handed on together.</p>
   </div>
 </section>
+═══ END FOUR ORDERS ═══ -->
 
-<!-- ═══ LATAIF ═════════════════════════════════════════════════ -->
+<!-- ═══ LATAIF ═════════════════════════════════════════════════
 <section class="band band--night" id="lataif">
   <div class="wrap">
     <p class="label">The Light</p>
@@ -889,6 +1154,7 @@ a{color:inherit}
     </div>
   </div>
 </section>
+═══ END LATAIF ═══ -->
 
 <!-- ═══ MAMULAT — before the light ═════════════════════════════ -->
 <section class="band band--night" id="practice">
@@ -1026,7 +1292,7 @@ a{color:inherit}
   </div>
 </section>
 
-<!-- ═══ THE GOLDEN CHAIN ═══════════════════════════════════════ -->
+<!-- ═══ THE GOLDEN CHAIN ═══════════════════════════════════════
 <section class="band band--paper" id="chain">
   <div class="wrap">
     <p class="label">Recited daily</p>
@@ -1055,6 +1321,7 @@ a{color:inherit}
     </div>
   </div>
 </section>
+═══ END THE GOLDEN CHAIN ═══ -->
 
 <!-- ═══ KHANQAH ════════════════════════════════════════════════ -->
 <section class="band band--paper" id="khanqah">
@@ -1113,51 +1380,15 @@ a{color:inherit}
       </div>
       <ul class="foot__nav">
         <li><a href="#intro">Introduction</a></li>
-        <li><a href="#path">The path</a></li>
-        <li><a href="#lataif">The work</a></li>
+        <li><a href="#zikar">The remembrance</a></li>
+        <li><a href="#concepts">Foundations</a></li>
         <li><a href="#practice">Daily practice</a></li>
         <li><a href="#founder">The founder</a></li>
-        <li><a href="#chain">The chain</a></li>
         <li><a href="#khanqah">Khanqah</a></li>
       </ul>
     </div>
 
-    <div class="colophon">
-      <h2>Colophon — how this page is set</h2>
-      <div class="col__grid">
-        <div>
-          <h3>Colour</h3>
-          <ul class="sw">
-            <li style="background:var(--qalb)"></li>
-            <li style="background:var(--ruh)"></li>
-            <li style="background:var(--sirr)"></li>
-            <li style="background:var(--khafi)"></li>
-            <li style="background:var(--akhfa)"></li>
-            <li style="background:var(--gold)"></li>
-          </ul>
-          <p>The five accents are the traditional colours of the lataif and appear nowhere but the lataif. Gold is kept for the chain and for light. The ground runs from a warm night to parchment, turning at Fajr.</p>
-        </div>
-        <div>
-          <h3>Type</h3>
-          <ul class="type-spec">
-            <li><b dir="rtl" lang="ur" style="font-family:var(--nastaliq)">نستعلیق</b><span>Gulzar — Urdu display</span></li>
-            <li><b dir="rtl" lang="ar" style="font-family:var(--naskh)">نسخ</b><span>Amiri — Arabic invocation</span></li>
-            <li><b>Spectral</b><span>Latin — headings and text</span></li>
-          </ul>
-          <p>Urdu leads and English follows, sharing a left edge. Arabic invocation is always naskh; Urdu content is always nastaliq.</p>
-        </div>
-        <div>
-          <h3>Noor</h3>
-          <p>Every band is lit from its own top edge, the way light falls through the oculus of a dome. In the hero the light of each inherited order runs down its own strand and gathers at the knot, one after another.</p>
-        </div>
-        <div>
-          <h3>Structure</h3>
-          <p>Only one thing on this page is drawn as a sequence, because only one thing is one: the golden chain. The founder's life is set as a register of places, and everything else stands on its own.</p>
-        </div>
-      </div>
-
-      <p class="legal">Compiled from public sources for design purposes. Several details — the order's current leadership, gathering times, contact addresses and the full golden chain — are marked as awaiting confirmation and must be settled with the khanqah before this page is published.</p>
-    </div>
+    <p class="foot__note">Ravi Rehan Shareef &middot; &copy; <span id="footYear">2026</span> Silsila-e-Saifia</p>
   </div>
 </footer>
 
@@ -1207,6 +1438,168 @@ a{color:inherit}
 </script>
 
 <script>
+/* The Zikar section: silsila tabs, Naqshbandi sub-tabs, and three
+   button-grid readers (seven lataif, 36 muraqabat, nine asbaq x2). */
+(function(){
+  var section = document.getElementById('zikar');
+  if(!section) return;
+
+  /* ---- top-level silsila tabs ---- */
+  var tabs = Array.prototype.slice.call(section.querySelectorAll('.zk-tab'));
+  tabs.forEach(function(b){
+    b.addEventListener('click', function(){
+      tabs.forEach(function(t){ t.setAttribute('aria-pressed', String(t === b)); });
+      tabs.forEach(function(t){
+        var panel = document.getElementById('zkPanel-' + t.dataset.zk);
+        if(panel) panel.hidden = (t !== b);
+      });
+    });
+  });
+
+  /* ---- Naqshbandi sub-tabs: Lataif / Nafi Isbat / Muraqabat ---- */
+  var subtabs = Array.prototype.slice.call(section.querySelectorAll('.zk-subtab'));
+  subtabs.forEach(function(b){
+    b.addEventListener('click', function(){
+      subtabs.forEach(function(t){ t.setAttribute('aria-pressed', String(t === b)); });
+      subtabs.forEach(function(t){
+        var sub = document.getElementById('zkSub-' + t.dataset.sub);
+        if(sub) sub.hidden = (t !== b);
+      });
+    });
+  });
+
+  /* ---- seven lataif reader ---- */
+  var LATAIF7 = {
+    qalb:  {ar:"قلب", tl:"Qalb — the heart", seat:"two fingers below the left breast", colour:"yellow", swatch:"var(--qalb)", prophet:"Adam", text:"Where the work begins. Remembrance is placed here first and held until it continues without effort."},
+    ruh:   {ar:"روح", tl:"Ruh — the spirit", seat:"two fingers below the right breast", colour:"red", swatch:"var(--ruh)", prophet:"Noah and Abraham", text:"Opened once the heart is settled. Attention lifts off the self and turns toward what gave it life."},
+    sirr:  {ar:"سرّ", tl:"Sirr — the secret", seat:"two fingers above the left breast", colour:"white", swatch:"var(--sirr)", prophet:"Moses", text:"Secret because nothing besides Allah is admitted into it, not because it is withheld."},
+    khafi: {ar:"خفی", tl:"Khafi — the hidden", seat:"two fingers above the right breast", colour:"black", swatch:"var(--khafi)", prophet:"Jesus", text:"The dimmest of the seven. Known by the shaykh's report of it, not the disciple's own account."},
+    akhfa: {ar:"اخفیٰ", tl:"Akhfa — the most hidden", seat:"the centre of the chest", colour:"green", swatch:"var(--akhfa)", prophet:"Muhammad ﷺ", text:"The last of the five subtle centres. Past it the work turns to the self, then the whole body."},
+    nafsi: {ar:"نفسی", tl:"Nafsi — the self", seat:"the forehead, where the hairline begins", colour:"clay", swatch:"var(--nafsi)", prophet:null, text:"Where the commanding self settles into a contented one; its overcoming brings humility in place of pride and self-will."},
+    qalabi:{ar:"قالبی", tl:"Qalabi — the mould", seat:"the whole body, centred at the brain", colour:"the body's own hue", swatch:"var(--qalabi)", prophet:null, text:"The body itself — earth, water, air and fire together. Its zikr brings every limb into remembrance and turns habit into character."}
+  };
+  var zlatBtns = Array.prototype.slice.call(section.querySelectorAll('.lat[data-zlat]'));
+  var zlatAr = document.getElementById('zlatAr'), zlatTl = document.getElementById('zlatTl'),
+      zlatMeta = document.getElementById('zlatMeta'), zlatText = document.getElementById('zlatText');
+  function showLat(key){
+    var d = LATAIF7[key]; if(!d) return;
+    zlatBtns.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.zlat === key)); });
+    zlatAr.textContent = d.ar; zlatTl.textContent = d.tl; zlatText.textContent = d.text;
+    zlatMeta.innerHTML =
+      '<li><b>Seat</b>' + d.seat + '</li>' +
+      '<li><b>Colour</b><span class="lat__swatch" style="color:' + d.swatch + '"></span>' + d.colour + '</li>' +
+      (d.prophet ? '<li><b>Attributed to</b>' + d.prophet + '</li>' : '');
+  }
+  zlatBtns.forEach(function(b){ b.addEventListener('click', function(){ showLat(b.dataset.zlat); }); });
+
+  /* ---- generic numbered-button reader, used by muraqabat + both asbaq lists ---- */
+  function buildReader(gridEl, items, els, opts){
+    opts = opts || {};
+    items.forEach(function(item, i){
+      var btn = document.createElement('button');
+      btn.className = 'zk-num';
+      btn.type = 'button';
+      btn.textContent = item.n;
+      btn.setAttribute('aria-pressed', String(i === 0));
+      btn.addEventListener('click', function(){
+        Array.prototype.forEach.call(gridEl.children, function(c, ci){ c.setAttribute('aria-pressed', String(ci === i)); });
+        render(item);
+      });
+      gridEl.appendChild(btn);
+    });
+    function render(item){
+      els.label.textContent = item.n + ' · ' + item.title;
+      els.ar.textContent = item.ar || '';
+      els.tr.textContent = item.tr || '';
+      els.note.textContent = item.note || '';
+    }
+    if(items.length) render(items[0]);
+  }
+
+  /* ---- 36 muraqabat ---- */
+  var MURAQABAT36 = [
+   {n:1,title:'Qalb',ar:'فیض می‌آید از ذات، بجون بلطیفۂ قلبی، من بواسطہ پیران کبار',tr:"Grace comes from the Essence — flowing into my qalb lataifa — through the mediation of the great masters.",note:"Attention rests at the heart and waits for the flow of remembrance to settle there."},
+   {n:2,title:'Ruh',ar:'فیض می‌آید از ذات، بجون بلطیفۂ روحی، من بواسطہ پیران کبار',tr:"Grace comes from the Essence into my ruh lataifa, through the great masters.",note:"The same waiting, now at the seat of the ruh."},
+   {n:3,title:'Sirr',ar:'فیض می‌آید از ذات، بجون بلطیفۂ سِرّی، من بواسطہ پیران کبار',tr:"Grace comes from the Essence into my sirr lataifa, through the great masters.",note:"At the seat of the sirr."},
+   {n:4,title:'Khafi',ar:'فیض می‌آید از ذات، بجون بلطیفۂ خفی، من بواسطہ رحمۃ اللہ علیہم پیران کبار',tr:"Grace comes from the Essence into my khafi lataifa, through the mercy of God upon the great masters.",note:"At the seat of the khafi."},
+   {n:5,title:'Akhfa',ar:'فیض می‌آید از ذات، بجون بلطیفۂ اخفیٰ، من بواسطہ مشائخ عظام علیہم الرضوان',tr:"Grace comes from the Essence into my akhfa lataifa, through the great mashaikh.",note:"At the seat of the akhfa — last of the five subtle centres."},
+   {n:6,title:'Nafsi',ar:'فیض می‌آید از ذات، بجون بلطیفۂ نفسی، من بواسطہ پیران کبار',tr:"Grace comes from the Essence into my nafsi lataifa, through the great masters.",note:"Turns attention to the self, the first of alam-e-khalq."},
+   {n:7,title:'Qalabi',ar:'فیض می‌آید از ذات، بجون بلطیفۂ قالبی، من بواسطہ پیران کبار',tr:"Grace comes from the Essence into my qalabi lataifa — the whole body — through the great masters.",note:"The body, taken as one lataifa."},
+   {n:8,title:'The five of Alam-e-Amr, together',ar:'فیض می‌آید از ذات، بجون بلطائفِ خمسۂ عالمِ امر، من بواسطہ پیران کبار',tr:"Grace comes from the Essence into the five lataif of Alam-e-Amr together, through the great masters.",note:"Qalb, ruh, sirr, khafi and akhfa, held at once rather than in sequence."},
+   {n:9,title:'The five of Alam-e-Khalq, together',ar:'فیض می‌آید از ذات، بجون بلطائفِ خمسۂ عالمِ خلق (نفسی و قالبی)، من بواسطہ پیران کبار دینؒ',tr:"Grace comes from the Essence into the five lataif of Alam-e-Khalq — nafsi and qalabi — through the great masters of the Din.",note:"Self and body, held together as the created world's own five."},
+   {n:10,title:'All ten together',ar:'فیض می‌آید از ذات، بجون بمجموعۂ لطائفِ عالمِ امر و عالمِ خلق، من بواسطہ پیران کبار',tr:"Grace comes from the Essence into the sum of the ten lataif of Alam-e-Amr and Alam-e-Khalq, through the great masters.",note:"The complete circuit of the person, all ten centres held as one."},
+   {n:11,title:'Ahdiyat — Oneness',ar:'محیط بجمیع صفاتِ ذات، منزّہ از جمیع عیوب و نقصانات، بی‌مثال، خاص بلطیفۂ قلبی، من بواسطہ پیران کبار',tr:"Allah, whose Essence gathers every perfect attribute and is free of every flaw, without likeness — flowing into my qalb lataifa, through the great masters.",note:"Marks the disciple's completion of the circle of possibility (dairah-e-imkan): the ten lataif's territory is now walked in full."},
+   {n:12,title:"Asl-e-Qalb — the heart's root",ar:'اِلٰہی قلب من بمقابل قلب نبی علیہ السلام، آن فیض تجلّائے صفاتِ فعلیّہ خود کہ از قلبِ نبی علیہ السلام بہ قلبِ آدم علیہ السلام رسانیدہ، بہ قلب من نیز برسانی، بواسطۂ پیران کبار',tr:"My God, place my heart opposite the Prophet's ﷺ heart, and let the same outpouring of Your active attributes that reached Adam through the Prophet's ﷺ heart reach mine too, through the great masters.",note:"The first inheritance of wilayat. The disciple stays engaged in the repentance and turning that marked Adam's own station, shedding base habits for good character."},
+   {n:13,title:"Asl-e-Ruh — the spirit's root",ar:'اِلٰہی روح من بمقابل روح نبی علیہ السلام...بواسطۂ پیران کبار',tr:"My God, place my ruh opposite the Prophet's ﷺ ruh, reaching me through Abraham and Noah as it reached the Prophet ﷺ, by the great masters.",note:"Those who dwell here take on Abraham and Noah's total reliance on Allah — meeting events without dread, fighting the nafs and Shaytan's guile as they arise, and seeing the unseen world as Abraham did."},
+   {n:14,title:"Asl-e-Sirr — the secret's root",ar:'اِلٰہی سرّ من بمقابل سرّ نبی علیہ السلام...بواسطۂ پیران کبار',tr:"My God, place my sirr opposite the Prophet's ﷺ sirr, as it reached him from Moses, by the great masters.",note:"Grants a share of Moses' station of divine address — a love that burns through the heart and spirit, admitting nothing contrary to the Sharia."},
+   {n:15,title:"Asl-e-Khafi — the hidden's root",ar:'اِلٰہی خفی من بمقابل خفی نبی علیہ السلام...بواسطۂ خواجگانِ نقشبند',tr:"My God, place my khafi opposite the Prophet's ﷺ khafi, as it reached him from Jesus, through the Naqshbandi khwajagan.",note:"A quiet station: the disciple is never wearied by worship, striving and self-effort here."},
+   {n:16,title:"Asl-e-Akhfa — the most hidden's root",ar:'اِلٰہی اخفائے من بمقابل اخفائے نبی علیہ السلام...بواسطۂ پیران کبار',tr:"My God, let my akhfa face the Prophet's ﷺ akhfa itself, that its outpouring — inclusive of every station — reach mine too.",note:"Since this lataifa is subordinate to the Prophet ﷺ directly, its yield surpasses every prior root and completes the disciple's inheritance of all ten lataif at once."},
+   {n:17,title:"Ma'iyyat — being-with",ar:'فیض می‌آید از ذات، بجون کہ ہمراہ است ہمراہ من و ہمراہ جمیع ممکنات، بلکہ ہمراہ ہر ذرّہ از ذرات ممکنات، بجون مفہومِ آیۂ کریمہ ھُوَ مَعَکُمْ اَیْنَ مَا کُنْتُمْ، بلطائفِ خمسہ عالمِ امر، من بواسطہ پیران کبار',tr:"Grace comes from the Essence which is with me and with every possible thing, indeed with every atom of them, per 'He is with you wherever you are' (57:4) — into the five lataif of Alam-e-Amr, through the great masters.",note:"The first muraqaba of the second circle, wilayat kubra. A vision in which the whole circle of possibility appears at once — pictured, per Imam Rabbani, as a circle within the Arsh."},
+   {n:18,title:"Aqrabiyat — nearness",ar:'فیض می‌آید از ذات کہ اصل اسماء و صفات است، کہ نزدیک‌تر است از من بہ من، و از رگِ گردن من بہ من نزدیک‌تر است، بمفہومِ بلاکیف آیۂ کریمہ وَنَحْنُ اَقْرَبُ اِلَیْہِ مِنْ حَبْلِ الْوَرِیْدِ، بلطیفۂ نفسی، من بواسطہ پیران کبار',tr:"Grace comes from the Essence, root of every name and attribute, nearer to me than I am to myself, nearer than my jugular vein — per 'We are nearer to him than his jugular vein' (50:16), without asking how — into my nafsi lataifa, through the great masters.",note:"Contemplating this nearness to every atom of creation, not only to oneself, is the fastest route through the second circle to the third."},
+   {n:19,title:"Muhabbat — love, first form",ar:'فیض می‌آید از ذات، بجون کہ اصل اسماء و صفات است، کہ دوست می‌دارد من را، و من دوست می‌دارم اُو را، بمفہومِ اِین آیۂ کریمہ یُحِبُّہُمْ وَیُحِبُّوْنَہٗ، خاص بلطیفۂ نفسی، من بواسطۂ پیران کبار',tr:"Grace comes from the Essence, root of every name and attribute, who loves me and whom I love — per 'He loves them and they love Him' (5:54) — specifically into my nafsi lataifa, through the great masters.",note:"Opens the third circle, wilayat kubra's outer arc, held at the nafsi lataifa."},
+   {n:20,title:"Muhabbat — love, second form",ar:'فیض می‌آید از ذات، بجون کہ اصل اسماء و صفات است، کہ دوست می‌دارد من را و من دوست می‌دارم اُو را، بمفہومِ اِین آیۂ کریمہ یُحِبُّہُمْ وَیُحِبُّوْنَہٗ، خاص بلطیفۂ نفسی، من بواسطۂ پیران کبار',tr:"The same love, held again — the outpouring now settling fully in the nafsi lataifa.",note:"A second, deeper pass through the same station before moving on."},
+   {n:21,title:"Dairah Qausi — the arc",ar:'فیض می‌آید از ذات، بجون کہ اصل اصل اسماء و صفات است کہ دوست می‌دارد من را و من دوست می‌دارم اُو را، بمفہومِ اِین آیۂ کریمہ یُحِبُّہُمْ وَیُحِبُّوْنَہٗ، خاص بلطیفۂ نفسی، من بواسطۂ پیران کبار',tr:"Grace flowing per the same verse, held at the fourth of the three circles' bounding arcs — where names, attributes and their modes meet the Essence directly.",note:"Best supported, the book notes, by extended recitation of the Qur'an alongside the negation-affirmation zikr; here the disciple attains complete extinction (fana) of self before God."},
+   {n:22,title:"Ism-e-Zahir — the Outward Name",ar:'فیض می‌آید از ذات، بجون کہ مسمّٰی بہ اسمِ ظاہر است، بمفہومِ اِین آیۂ کریمہ ہُوَ الْاَوَّلُ وَالْاٰخِرُ وَالظَّاہِرُ وَالْبَاطِنُ وَہُوَ بِکُلِّ شَیْءٍ عَلِیْمٌ، خاص بلطیفۂ نفسی، من بواسطۂ پیران کبار',tr:"Grace comes from the Essence named by the Outward — 'He is the First and the Last, the Outward and the Inward, and He has knowledge of all things' (57:3) — into my nafsi lataifa, through the great masters.",note:"Refining the character further still requires this muraqaba, since pride and self-regard can survive even fana."},
+   {n:23,title:"Ism-e-Batin — the Inward Name",ar:'فیض می‌آید از ذات، بجون کہ مسمّٰی بہ اسمِ باطن است، ولایتِ علیا است، ولایتِ ملاءِ اعلیٰ است، بمفہومِ اِین آیۂ کریمہ ہُوَ الْاَوَّلُ وَالْاٰخِرُ وَالظَّاہِرُ وَالْبَاطِنُ وَہُوَ بِکُلِّ شَیْءٍ عَلِیْمٌ، من بواسطۂ پیران کبار',tr:"Grace comes from the Essence named by the Inward — the higher wilayat, the wilayat of the exalted assembly — per the same verse, through the great masters.",note:"The rarest station of the two: even the angels' nearness to God does not carry this rank, which belongs to the prophets and, through them, some of the awliya."},
+   {n:24,title:"Kamalat-e-Nubuwwat — the perfections of prophethood",ar:'فیض می‌آید از ذات، بجون کہ منشاءِ کمالاتِ نبوت است، بہ عنصرِ خاک، من بواسطہ مشائخِ عظام علیہم الرضوان',tr:"Grace comes from the Essence, the source of the perfections of prophethood, through the element of dust, by the great mashaikh.",note:"A first tier among three ascending degrees — nubuwwat, risalat, and ulul-azm — culminating in the perfections proper to the Seal of Messengers ﷺ alone."},
+   {n:25,title:"Kamalat-e-Risalat — the perfections of messengership",ar:'فیض می‌آید از ذات، بجون کہ منشاءِ کمالاتِ رسالت است، بہ ہیئتِ وحدانی، من بواسطہ پیران کبار',tr:"Grace comes from the Essence, the source of the perfections of messengership, in its oneness, by the great masters.",note:"The second tier, opening onto the circle of messengers proper."},
+   {n:26,title:"Kamalat-e-Anbiya Ulul-Azm — the resolute messengers",ar:'فیض می‌آید از ذات، بجون کہ منشاءِ کمالاتِ انبیاء اولوالعزم است، بہ ہیئتِ وحدانی، من بواسطہ پیران کبار',tr:"Grace comes from the Essence, source of the perfections of the resolute messengers — Muhammad ﷺ, Abraham, Noah, Moses and Jesus — by the great masters.",note:"Pictured in the book as nested circles: nubuwwat outermost, then risalat, then ulul-azm, with the Seal of Messengers' ﷺ own circle — dairah-e-qayyumiyat — at the centre of all."},
+   {n:27,title:"Haqiqat Ka'ba Rabbani — the Lordly Ka'ba's reality",ar:'فیض می‌آید از ذات، بجون کہ مسجودِ جمیع ممکنات است، و منشاءِ حقیقتِ کعبہ ربانی است، بہ ہیئتِ وحدانی، من بواسطۂ پیران کبار',tr:"Grace comes from the Essence toward which every possible thing prostrates, source of the Lordly Ka'ba's reality, in its oneness, through the great masters.",note:"The Ka'ba's true reality, the book explains, is the light every direction of prayer ultimately faces — beyond, not merely equal to, the stations of Muhammadan and Ahmadan reality that precede it."},
+   {n:28,title:"Haqiqat Qur'an Majid — the Noble Qur'an's reality",ar:'فیض می‌آید از ذات، بجون کہ حضرت ذاتِ ما تعیّن حقیقتِ قرآن مجید است، بہ ہیئتِ وحدانی، من بواسطۂ پیران کبار',tr:"Grace comes from the Essence which, without confinement, is manifest as the reality of the Noble Qur'an, in its oneness, through the great masters.",note:"Not to be reduced to the light of the mus'haf alone; every letter of the Qur'an is, in this view, an ocean carrying the reader toward the One it was sent to reach."},
+   {n:29,title:"Haqiqat Salat/Salawat — the reality of Prayer and blessing",ar:'فیض می‌آید از ذات کمال و وسعت، بجون کہ منشاءِ حقیقتِ صلوٰۃ است، بہ ہیئتِ وحدانی، من بواسطۂ پیران کبار (توقف روز)',tr:"Grace comes from the Essence of perfection and vastness, source of the reality of Prayer, in its oneness, through the great masters. (A day's pause here.)",note:"On the night of the Mi'raj Allah said 'O Muhammad, turn — for it is by your turning that your Lord is seen'; the salat's inward perfections mirror the outward ones, following its obligations, sunan and recommended acts closely."},
+   {n:30,title:"Ma'budiyat Sirf — being worshipped, absolutely",ar:'فیض می‌آید از ذات، بجون کہ منشاءِ معبودیتِ صرف است، بہ ہیئتِ وحدانی، من بواسطۂ پیران کبار (توقف روز)',tr:"Grace comes from the Essence, source of being worshipped absolutely, in its oneness, through the great masters. (A day's pause here.)",note:"Ranked above the reality of Prayer itself — the furthest point reached by the greatest of the arifin — and shared with no one else in this station."},
+   {n:31,title:"Haqiqat Ibrahimi — Abraham's reality",ar:'خود است و منشاءِ حقیقتِ ابراہیمی است، بہ ہیئتِ وحدانی، من بواسطۂ پیران کبار',tr:"It is itself, and the source of Abraham's reality, in its oneness, through the great masters.",note:"First of four muraqabat on the realities of the ulul-azm messengers, walked one after another."},
+   {n:32,title:"Haqiqat Musawi — Moses' reality",ar:'خود است و منشاءِ حقیقتِ موسوی است، بہ ہیئتِ وحدانی، من بواسطۂ پیران کبار',tr:"It is itself, and the source of Moses' reality, in its oneness, through the great masters.",note:"Followed directly from Abraham's."},
+   {n:33,title:"Haqiqat Muhammadi — the Muhammadan reality",ar:'خود است و منشاءِ حقیقتِ محمدی است، بہ ہیئتِ وحدانی، من بواسطۂ پیران کبار',tr:"It is itself, and the source of the Muhammadan reality, in its oneness, through the great masters.",note:"Distinguished in the book from the Ahmadan reality that follows it — the two named differently though inseparable."},
+   {n:34,title:"Haqiqat Ahmadi — the Ahmadan reality",ar:'خود است و منشاءِ حقیقتِ احمدی است، بہ ہیئتِ وحدانی، من بواسطۂ پیران کبار',tr:"It is itself, and the source of the Ahmadan reality, in its oneness, through the great masters.",note:"The station nearest the Ka'ba's own reality, last of the four ulul-azm muraqabat."},
+   {n:35,title:"Hubb-e-Sirf — love, absolute",ar:'فیض می‌آید از ذات، بجون کہ منشاءِ حبِ صرف است، بہ ہیئتِ وحدانی، من بواسطۂ پیران کبار',tr:"Grace comes from the Essence, source of love in its absolute form, in its oneness, through the great masters.",note:"Love with no object named beside the Essence itself — the second-to-last muraqaba of the whole sequence."},
+   {n:36,title:"La-Ta'ayyun — beyond definition",ar:'فیض می‌آید از ذات مطلق، بجون کہ موجود است، بلاوجودِ خارجی، منزّہ از جمیعِ تعیّنات، بہ ہیئتِ وحدانی، من بواسطۂ پیران کبار (توقف روز)',tr:"Grace comes from the Absolute Essence, which is, without external existence, free of every definition, in its oneness, through the great masters. (A day's pause here.)",note:"The final muraqaba. Not every disciple reaches every circle — some attain wilayat qalbiya, some kubra, some amaliya, and a rare few all three; the rest is the fuller path for whoever is granted more."}
+  ];
+  var mrqGrid = document.getElementById('zkMrqGrid');
+  if(mrqGrid) buildReader(mrqGrid, MURAQABAT36, {
+    label: document.getElementById('mrqLabel'), ar: document.getElementById('mrqAr'),
+    tr: document.getElementById('mrqTr'), note: document.getElementById('mrqNote')
+  });
+
+  /* ---- Qadiriyya, nine asbaq ---- */
+  var QADIRIYYA9 = [
+    {n:1, title:"Nafi-Ithbat of the Kalima Tayyibah", ar:'لَا اِلٰهَ اِلَّا اللّٰه', tr:"There is no god but Allah.", note:"'La' is drawn up from the navel to both shoulders as negation, sweeping away all else; 'Illa'llah' is struck onto the heart as affirmation, clearing it of everything but Allah. 1000 times."},
+    {n:2, title:"Kalima Tayyibah with the Prophet's name", ar:'لَا اِلٰهَ اِلَّا اللّٰه، مُحَمَّدٌ رَّسُوْلُ اللّٰه', tr:"There is no god but Allah; Muhammad is the Messenger of Allah.", note:"Same negation-affirmation as the first lesson, then a second round adding the testimony of the Prophet ﷺ, struck onto the akhfa lataifa. 1000 times."},
+    {n:3, title:"Allah Jalla Jalaluhu / Allah", ar:'اللہ جل جلالہ، اللہ', tr:"Allah, Glorious is His Majesty — then Allah alone.", note:"A 'tabir' lesson: the fuller name and the bare name recited in alternation, in counted sets."},
+    {n:4, title:'"Hu" circulated through the five lataif', ar:'ہُوْ', tr:"He.", note:"Held silently and drawn through qalb → sirr → khafi → akhfa → ruh and back to qalb, moving in a circle rather than a line — like a sword being drawn from its sheath."},
+    {n:5, title:"Muraqaba after Fajr", ar:'مراقبہ بعد از فجر', tr:"", note:"Two rakat, then sit facing the Qibla, eyes closed, holding 'Allah' at the qalb lataifa while turning attention toward Madina Munawwara. About five minutes."},
+    {n:6, title:'"Allah Hu"', ar:'اللہ ہُوْ', tr:"Allah, He.", note:"The two names joined and repeated as a single breath-pair."},
+    {n:7, title:'"Hu Allah"', ar:'ہُوْ اللہ', tr:"He, Allah.", note:"The same pair, reversed — kept distinct from the sixth lesson rather than treated as identical."},
+    {n:8, title:'"Illa Hu"', ar:'اِلَّا ہُوْ', tr:"But He.", note:"The affirmation alone, without the preceding negation carried over from the earlier lessons."},
+    {n:9, title:"Durood Sharif", ar:'صَلِّ وَسَلِّمْ وَبَارِكْ عَلَيْهِ وَعَلٰى جَمِيْعِ الْاَنْبِيَاءِ وَالْمُرْسَلِيْن', tr:"Bless him, grant him peace, and shower blessing upon him and upon all the prophets and messengers.", note:"Sit facing the direction of Madina Munawwara, kneeling, perfumed. Held in the akhfa lataifa, said silently then aloud, 1000 times, closing with this longer durood recited once."}
+  ];
+  var qadGrid = document.getElementById('zkQadGrid');
+  if(qadGrid) buildReader(qadGrid, QADIRIYYA9, {
+    label: document.getElementById('qadLabel'), ar: document.getElementById('qadAr'),
+    tr: document.getElementById('qadTr'), note: document.getElementById('qadNote')
+  });
+
+  /* ---- Chishtiyya, nine asbaq ---- */
+  var CHISHTIYYA9 = [
+    {n:1, title:'"Hu" at the heart, then circulated', ar:'ہُوْ', tr:"He.", note:"Held first at the qalb, then circulated qalb → sirr → khafi → akhfa → ruh and back."},
+    {n:2, title:"Allah and Hu, voiced separately", ar:'اللہ ۔۔۔ ہُوْ', tr:"Allah ... He.", note:"The two names are kept distinct rather than merged into one breath, so their sound does not blur together."},
+    {n:3, title:"Allah Jalla Jalaluhu / Jalla Jalaluhu", ar:'اللہ جل جلالہ، جل جلالہ', tr:"Allah, Glorious is His Majesty — then Glorious is His Majesty alone.", note:"The fuller phrase and its shortened form, alternated."},
+    {n:4, title:'"Hu" through the five lataif again', ar:'ہُوْ', tr:"He.", note:"Repeated through all five lataif of Alam-e-Amr, with a slight circular motion held at each point in turn."},
+    {n:5, title:"Muraqaba after Fajr", ar:'مراقبہ بعد از فجر', tr:"", note:"Facing Madina Munawwara — the same structure as the Qadiri fifth lesson; the book effectively treats this as one shared practice across the two silsilas."},
+    {n:6, title:'"Allah Hu"', ar:'اللہ ہُوْ', tr:"Allah, He.", note:"As in the Qadiri sixth lesson."},
+    {n:7, title:'"Hu Allah"', ar:'ہُوْ اللہ', tr:"He, Allah.", note:"As in the Qadiri seventh lesson."},
+    {n:8, title:"Anta'l-Hadi", ar:'اَنْتَ الْھَادِیْ اَنْتَ الْحَقُّ لَیْسَ الْھَادِیْ اِلَّا ھُوْ', tr:"You are the Guide, You are the Truth; there is no guide save He.", note:"Held first at qalb and khafi, moving through akhfa and back to qalb — a zikr of utmost humility and self-effacement."},
+    {n:9, title:"Durood Sharif", ar:'صَلِّ وَسَلِّمْ وَبَارِكْ عَلَيْهِ وَعَلٰى جَمِيْعِ الْاَنْبِيَاءِ وَالْمُرْسَلِيْن', tr:"Bless him, grant him peace, and shower blessing upon him and upon all the prophets and messengers.", note:"Same structure as the Qadiri ninth lesson."}
+  ];
+  var chiGrid = document.getElementById('zkChiGrid');
+  if(chiGrid) buildReader(chiGrid, CHISHTIYYA9, {
+    label: document.getElementById('chiLabel'), ar: document.getElementById('chiAr'),
+    tr: document.getElementById('chiTr'), note: document.getElementById('chiNote')
+  });
+})();
+</script>
+
+<script>
 /* The confluence list and the golden chain settle into place as
    they're reached. Skipped entirely if the browser can't observe
    intersections or the visitor asked for less motion — content
@@ -1217,7 +1610,7 @@ a{color:inherit}
 
   document.documentElement.classList.add('js-reveal');
 
-  var targets = document.querySelectorAll('.lineup__item, .chain--long li');
+  var targets = document.querySelectorAll('.lineup__item, .chain--long li, .concept');
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
       if(entry.isIntersecting){
@@ -1229,6 +1622,11 @@ a{color:inherit}
 
   targets.forEach(function(t){ io.observe(t); });
 })();
+</script>
+
+<script>
+var footYear = document.getElementById('footYear');
+if(footYear) footYear.textContent = new Date().getFullYear();
 </script>
 
 </body>
